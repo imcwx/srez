@@ -50,7 +50,7 @@ tf.app.flags.DEFINE_float('learning_rate_start', 0.00020,
 tf.app.flags.DEFINE_integer('learning_rate_half_life', 5000,
                             "Number of batches until learning rate is halved")
 
-tf.app.flags.DEFINE_bool('log_device_placement', False,
+tf.app.flags.DEFINE_bool('log_device_placement', True,
                          "Log the device where variables are placed.")
 
 tf.app.flags.DEFINE_integer('sample_size', 64,
@@ -81,6 +81,9 @@ tf.app.flags.DEFINE_string('test_dir', 'test',
 
 tf.app.flags.DEFINE_string('predict_dir', 'predict',
                            "Output folder for unseen test set.")
+
+tf.app.flags.DEFINE_string('allow_gpu_growth', True,
+                           "Set whether to allow GPU growth.")
 
 
 def prepare_dirs(delete_train_dir=False):
@@ -145,7 +148,9 @@ def prepare_test16_dir():
 
 def setup_tensorflow():
     # Create session
-    config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
+    config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement, device_count={'GPU': 1})
+    config.gpu_options.allow_growth = FLAGS.allow_gpu_growth
+
     sess = tf.Session(config=config)
 
     # Initialize rng with a deterministic seed
