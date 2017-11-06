@@ -1,6 +1,5 @@
-
-# import imageio
-# imageio.plugins.ffmpeg.download()
+import imageio
+imageio.plugins.ffmpeg.download()
 
 import srez_demo
 import srez_input
