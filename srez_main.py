@@ -148,9 +148,9 @@ def prepare_test16_dir():
 
 def setup_tensorflow():
     # Create session
-    config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement, device_count={'GPU': 1})
+    # config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement, device_count={'GPU': 1})
+    config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
     config.gpu_options.allow_growth = FLAGS.allow_gpu_growth
-
     sess = tf.Session(config=config)
 
     # Initialize rng with a deterministic seed
