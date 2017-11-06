@@ -71,7 +71,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 16,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 5,
+tf.app.flags.DEFINE_integer('train_time', 720,
                             "Time in minutes to train the model")
 # 20
 
@@ -84,6 +84,7 @@ tf.app.flags.DEFINE_string('predict_dir', 'predict',
 
 tf.app.flags.DEFINE_string('allow_gpu_growth', True,
                            "Set whether to allow GPU growth.")
+
 
 
 def prepare_dirs(delete_train_dir=False):
@@ -147,11 +148,13 @@ def prepare_test16_dir():
 
 
 def setup_tensorflow():
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
     # Create session
     config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement, device_count={'GPU': 2})
-    # config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
+    config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
     config.gpu_options.allow_growth = FLAGS.allow_gpu_growth
     sess = tf.Session(config=config)
+    # tf.device('/gpu:1')
 
     # Initialize rng with a deterministic seed
     with sess.graph.as_default():
