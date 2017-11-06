@@ -51,7 +51,7 @@ tf.app.flags.DEFINE_float('learning_rate_start', 0.00020,
 tf.app.flags.DEFINE_integer('learning_rate_half_life', 5000,
                             "Number of batches until learning rate is halved")
 
-tf.app.flags.DEFINE_bool('log_device_placement', True,
+tf.app.flags.DEFINE_bool('log_device_placement', False,
                          "Log the device where variables are placed.")
 
 tf.app.flags.DEFINE_integer('sample_size', 128,
@@ -74,7 +74,6 @@ tf.app.flags.DEFINE_string('train_dir', 'train',
 tf.app.flags.DEFINE_integer('train_time', 5,
                             "Time in minutes to train the model")
 # 20
-
 
 # I Added, Not Alphabetically.
 tf.app.flags.DEFINE_string('test_dir', 'test',

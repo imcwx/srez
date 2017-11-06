@@ -93,7 +93,7 @@ def train_model(train_data):
         ops = [td.gene_minimize, td.disc_minimize, td.gene_loss, td.disc_real_loss, td.disc_fake_loss]
         _, _, gene_loss, disc_real_loss, disc_fake_loss = td.sess.run(ops, feed_dict=feed_dict)
         
-        if batch % 10 == 0:
+        if batch % 20 == 0:
             # Show we are alive
             elapsed = int(time.time() - start_time)/60
             print('Progress[%3d%%], ETA[%4dm], Batch [%4d], G_Loss[%3.3f], D_Real_Loss[%3.3f], D_Fake_Loss[%3.3f]' %
