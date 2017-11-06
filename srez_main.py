@@ -19,8 +19,9 @@ import tensorflow as tf
 FLAGS = tf.app.flags.FLAGS
 
 # Configuration (alphabetically)
-tf.app.flags.DEFINE_integer('batch_size', 16,
+tf.app.flags.DEFINE_integer('batch_size', 32,
                             "Number of samples per batch.")
+# 16
 
 tf.app.flags.DEFINE_string('checkpoint_dir', 'checkpoint',
                            "Output folder where checkpoints are dumped.")
@@ -53,11 +54,11 @@ tf.app.flags.DEFINE_integer('learning_rate_half_life', 5000,
 tf.app.flags.DEFINE_bool('log_device_placement', True,
                          "Log the device where variables are placed.")
 
-tf.app.flags.DEFINE_integer('sample_size', 64,
+tf.app.flags.DEFINE_integer('sample_size', 128,
                             "Image sample size in pixels. Range [64,128]")
 # 64
 
-tf.app.flags.DEFINE_integer('summary_period', 10,
+tf.app.flags.DEFINE_integer('summary_period', 400,
                             "Number of batches between summary data dumps")
 # 200
 
@@ -70,7 +71,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 16,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 10,
+tf.app.flags.DEFINE_integer('train_time', 5,
                             "Time in minutes to train the model")
 # 20
 
