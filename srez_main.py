@@ -1,3 +1,4 @@
+
 # import imageio
 # imageio.plugins.ffmpeg.download()
 
@@ -28,7 +29,7 @@ tf.app.flags.DEFINE_string('checkpoint_dir', 'checkpoint',
 tf.app.flags.DEFINE_integer('checkpoint_period', 10000,
                             "Number of batches in between checkpoints")
 
-tf.app.flags.DEFINE_string('dataset', 'dataset_small',
+tf.app.flags.DEFINE_string('dataset', 'data',
                            "Path to the dataset directory.")
 # dataset
 
