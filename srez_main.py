@@ -1,13 +1,19 @@
+# import imageio
+# imageio.plugins.ffmpeg.download()
+
 import srez_demo
 import srez_input
 import srez_model
 import srez_train
+import srez_test
 
+import sys
 import os.path
 import random
 import numpy as np
 import numpy.random
 
+from PIL import Image
 import tensorflow as tf
 
 FLAGS = tf.app.flags.FLAGS
@@ -22,14 +28,15 @@ tf.app.flags.DEFINE_string('checkpoint_dir', 'checkpoint',
 tf.app.flags.DEFINE_integer('checkpoint_period', 10000,
                             "Number of batches in between checkpoints")
 
-tf.app.flags.DEFINE_string('dataset', 'dataset',
+tf.app.flags.DEFINE_string('dataset', 'dataset_small',
                            "Path to the dataset directory.")
+# dataset
 
 tf.app.flags.DEFINE_float('epsilon', 1e-8,
                           "Fuzz term to avoid numerical instability")
 
 tf.app.flags.DEFINE_string('run', 'demo',
-                            "Which operation to run. [demo|train]")
+                            "Which operation to run. [demo|train|test]")
 
 tf.app.flags.DEFINE_float('gene_l1_factor', .90,
                           "Multiplier for generator L1 loss term")
@@ -48,9 +55,11 @@ tf.app.flags.DEFINE_bool('log_device_placement', False,
 
 tf.app.flags.DEFINE_integer('sample_size', 64,
                             "Image sample size in pixels. Range [64,128]")
+# 64
 
-tf.app.flags.DEFINE_integer('summary_period', 200,
+tf.app.flags.DEFINE_integer('summary_period', 10,
                             "Number of batches between summary data dumps")
+# 200
 
 tf.app.flags.DEFINE_integer('random_seed', 0,
                             "Seed used to initialize rng.")
@@ -61,8 +70,18 @@ tf.app.flags.DEFINE_integer('test_vectors', 16,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 20,
+tf.app.flags.DEFINE_integer('train_time', 10,
                             "Time in minutes to train the model")
+# 20
+
+
+# I Added, Not Alphabetically.
+tf.app.flags.DEFINE_string('test_dir', 'test',
+                           "Test folder where images are unseen test set.")
+
+tf.app.flags.DEFINE_string('predict_dir', 'predict',
+                           "Output folder for unseen test set.")
+
 
 def prepare_dirs(delete_train_dir=False):
     # Create checkpoint dir (do not delete anything)
@@ -87,6 +106,42 @@ def prepare_dirs(delete_train_dir=False):
 
     return filenames
 
+def prepare_test_dir():
+    # Check test dir Exist
+    if not tf.gfile.Exists(FLAGS.test_dir) or \
+       not tf.gfile.IsDirectory(FLAGS.test_dir):
+        raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.test_dir,))
+
+    # Check predict dir Exist
+    if not tf.gfile.Exists(FLAGS.predict_dir) or \
+            not tf.gfile.IsDirectory(FLAGS.predict_dir):
+        raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.predict_dir,))
+
+    filenames = tf.gfile.ListDirectory(FLAGS.test_dir)
+    filenames = sorted(filenames)
+    random.shuffle(filenames)
+    filenames = [os.path.join(FLAGS.test_dir, f) for f in filenames]
+
+    return filenames
+
+def prepare_test16_dir():
+    # Check test dir Exist
+    if not tf.gfile.Exists(FLAGS.test_dir16) or \
+       not tf.gfile.IsDirectory(FLAGS.test_dir16):
+        raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.test_dir16,))
+
+    # Check predict dir Exist
+    if not tf.gfile.Exists(FLAGS.predict_dir16) or \
+            not tf.gfile.IsDirectory(FLAGS.predict_dir16):
+        raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.predict_dir16,))
+
+    filenames = tf.gfile.ListDirectory(FLAGS.test_dir16)
+    filenames = sorted(filenames)
+    random.shuffle(filenames)
+    filenames = [os.path.join(FLAGS.test_dir16, f) for f in filenames]
+
+    return filenames
+
 
 def setup_tensorflow():
     # Create session
@@ -100,9 +155,99 @@ def setup_tensorflow():
     random.seed(FLAGS.random_seed)
     np.random.seed(FLAGS.random_seed)
 
-    summary_writer = tf.train.SummaryWriter(FLAGS.train_dir, sess.graph)
+    summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)
 
     return sess, summary_writer
+
+
+def _test(onefilename=False):
+    # Load checkpoint
+    if not tf.gfile.IsDirectory(FLAGS.checkpoint_dir):
+        raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.checkpoint_dir,))
+
+    # Prepare directories
+    if onefilename:
+        filenames = [onefilename]
+    else:
+        # Load test set
+        if not tf.gfile.IsDirectory(FLAGS.test_dir):
+            raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.test_dir,))
+        filenames = prepare_test_dir()
+
+    # Setup global tensorflow state
+    sess, summary_writer = setup_tensorflow()
+
+    # Setup async input queues
+    test_features, test_labels = srez_input.test_inputs(sess, filenames)
+
+    # Create and initialize model
+    [gene_minput, gene_moutput,
+     gene_output, gene_var_list,
+     disc_real_output, disc_fake_output, disc_var_list] = \
+        srez_model.create_model(sess, test_features, test_labels)
+
+    # Restore variables from checkpoint
+    saver = tf.train.Saver()
+    filename = 'checkpoint_new.txt'
+    filename = os.path.join(FLAGS.checkpoint_dir, filename)
+
+    saver.restore(sess, filename)
+
+    test_data = TrainData(locals())
+    td = test_data
+    test_feature, test_label = td.sess.run([td.test_features, td.test_labels])
+    feed_dict = {td.gene_minput: test_feature}
+    gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
+
+    if onefilename:
+        srez_test.predict_one(test_data, gene_output)
+    else:
+        srez_test.predict(test_data, test_feature, test_label, gene_output)
+
+
+def _test16(onefilename=False):
+    # Load checkpoint
+    if not tf.gfile.IsDirectory(FLAGS.checkpoint_dir):
+        raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.checkpoint_dir,))
+
+    # Load test set
+    if not tf.gfile.IsDirectory(FLAGS.test_dir):
+        raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.test_dir,))
+
+    # Setup global tensorflow state
+    sess, summary_writer = setup_tensorflow()
+
+    # Prepare directories
+    filenames = [onefilename]
+
+    im = Image.open(onefilename)
+    size = im.size
+
+    # Setup async input queues
+    test_features, test_labels = srez_input.test_inputs(sess, filenames, size)
+
+    # Create and initialize model
+    [gene_minput, gene_moutput,
+     gene_output, gene_var_list,
+     disc_real_output, disc_fake_output, disc_var_list] = \
+        srez_model.create_model(sess, test_features, test_labels)
+
+    # Restore variables from checkpoint
+    saver = tf.train.Saver()
+    filename = 'checkpoint_new.txt'
+    filename = os.path.join(FLAGS.checkpoint_dir, filename)
+
+    saver.restore(sess, filename)
+
+    test_data = TrainData(locals())
+    td = test_data
+
+    test_feature, test_label = td.sess.run([td.test_features, td.test_labels])
+    feed_dict = {td.gene_minput: test_label}
+    gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
+
+    srez_test.predict_one(test_data, test_feature, test_label, gene_output)
+
 
 def _demo():
     # Load checkpoint
@@ -128,10 +273,12 @@ def _demo():
     saver = tf.train.Saver()
     filename = 'checkpoint_new.txt'
     filename = os.path.join(FLAGS.checkpoint_dir, filename)
+
     saver.restore(sess, filename)
 
     # Execute demo
     srez_demo.demo1(sess)
+
 
 class TrainData(object):
     def __init__(self, dictionary):
@@ -142,7 +289,8 @@ def _train():
     sess, summary_writer = setup_tensorflow()
 
     # Prepare directories
-    all_filenames = prepare_dirs(delete_train_dir=True)
+    # all_filenames = prepare_dirs(delete_train_dir=True)
+    all_filenames = prepare_dirs(delete_train_dir=False)
 
     # Separate training and test sets
     train_filenames = all_filenames[:-FLAGS.test_vectors]
@@ -180,11 +328,26 @@ def _train():
 
 def main(argv=None):
     # Training or showing off?
+    # _train()
+    # _demo()
+    # _test()
+    # _test16("C:/GitProjects/srez/test_down/202597.jpg")
+    # _test16("C:/GitProjects/srez/test/202597.jpg")
 
-    if FLAGS.run == 'demo':
-        _demo()
-    elif FLAGS.run == 'train':
-        _train()
+    # filename = sys.argv[1]
+    # _test16(filename)
+
+    if len(sys.argv) == 2:
+        filename = sys.argv[1]
+        _test16(filename)
+    elif len(sys.argv) > 2:
+        if FLAGS.run == 'demo':
+            _demo()
+        elif FLAGS.run == 'train':
+            _train()
+        elif FLAGS.run == 'test':
+            _test()
+
 
 if __name__ == '__main__':
   tf.app.run()

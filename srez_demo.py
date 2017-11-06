@@ -17,7 +17,7 @@ def demo1(sess):
 
     assert len(filenames) >= 1
 
-    fps        = 30
+    fps        = 10
 
     # Create video file from PNGs
     print("Producing video file...")
@@ -25,4 +25,3 @@ def demo1(sess):
     clip      = mpe.ImageSequenceClip(filenames, fps=fps)
     clip.write_videofile(filename)
     print("Done!")
-    
