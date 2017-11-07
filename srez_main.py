@@ -21,7 +21,7 @@ import tensorflow as tf
 FLAGS = tf.app.flags.FLAGS
 
 # Configuration (alphabetically)
-tf.app.flags.DEFINE_integer('batch_size', 16,
+tf.app.flags.DEFINE_integer('batch_size', 32,
                             "Number of samples per batch.")
 # 16
 
@@ -67,14 +67,14 @@ tf.app.flags.DEFINE_integer('summary_period', 400,
 tf.app.flags.DEFINE_integer('random_seed', 0,
                             "Seed used to initialize rng.")
 
-tf.app.flags.DEFINE_integer('test_vectors', 16,
+tf.app.flags.DEFINE_integer('test_vectors', 32,
                             """Number of features to use for testing""")
 # 16
                             
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 180,
+tf.app.flags.DEFINE_integer('train_time', 1440,
                             "Time in minutes to train the model")
 # 20
 
