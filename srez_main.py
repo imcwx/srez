@@ -71,7 +71,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 16,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 720,
+tf.app.flags.DEFINE_integer('train_time', 180,
                             "Time in minutes to train the model")
 # 20
 
@@ -85,7 +85,7 @@ tf.app.flags.DEFINE_string('predict_dir', 'predict',
 tf.app.flags.DEFINE_string('allow_gpu_growth', True,
                            "Set whether to allow GPU growth.")
 
-tf.app.flags.DEFINE_integer('test_size', 128,
+tf.app.flags.DEFINE_integer('test_size', 32,
                             "Image test size in pixels")
 
 tf.app.flags.DEFINE_integer('crop_size', 32,
@@ -159,6 +159,7 @@ def setup_tensorflow():
     # config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
     config.gpu_options.allow_growth = FLAGS.allow_gpu_growth
     config.gpu_options.per_process_gpu_memory_fraction = 0.80
+    config.gpu_options.allocator_type = 'BFC'
     sess = tf.Session(config=config)
     # tf.device('/gpu:1')
 
