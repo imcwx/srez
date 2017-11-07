@@ -1,14 +1,13 @@
 import imageio
 imageio.plugins.ffmpeg.download()
 
+import os
+
 import srez_demo
 import srez_input
 import srez_model
 import srez_train
 import srez_test
-
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 
 import sys
 import os.path
@@ -22,7 +21,7 @@ import tensorflow as tf
 FLAGS = tf.app.flags.FLAGS
 
 # Configuration (alphabetically)
-tf.app.flags.DEFINE_integer('batch_size', 32,
+tf.app.flags.DEFINE_integer('batch_size', 16,
                             "Number of samples per batch.")
 # 16
 
@@ -68,8 +67,9 @@ tf.app.flags.DEFINE_integer('summary_period', 400,
 tf.app.flags.DEFINE_integer('random_seed', 0,
                             "Seed used to initialize rng.")
 
-tf.app.flags.DEFINE_integer('test_vectors', 16,
+tf.app.flags.DEFINE_integer('test_vectors', 32,
                             """Number of features to use for testing""")
+# 16
                             
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
@@ -89,10 +89,10 @@ tf.app.flags.DEFINE_string('allow_gpu_growth', True,
                            "Set whether to allow GPU growth.")
 
 tf.app.flags.DEFINE_integer('test_size', 32,
-                            "Image test size in pixels")
+                            "Test pixel size in pixels")
 
 tf.app.flags.DEFINE_integer('crop_size', 32,
-                            "Image test size in pixels")
+                            "Image crop size in pixels")
 
 
 def prepare_dirs(delete_train_dir=False):
@@ -161,7 +161,7 @@ def setup_tensorflow():
     # config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
     config.gpu_options.allow_growth = FLAGS.allow_gpu_growth
     config.gpu_options.per_process_gpu_memory_fraction = 0.80
-    config.gpu_options.allocator_type = 'BFC'
+    # config.gpu_options.allocator_type = 'BFC'
     sess = tf.Session(config=config)
     # tf.device('/gpu:1')
 
