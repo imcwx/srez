@@ -67,7 +67,7 @@ tf.app.flags.DEFINE_integer('summary_period', 400,
 tf.app.flags.DEFINE_integer('random_seed', 0,
                             "Seed used to initialize rng.")
 
-tf.app.flags.DEFINE_integer('test_vectors', 32,
+tf.app.flags.DEFINE_integer('test_vectors', 16,
                             """Number of features to use for testing""")
 # 16
                             

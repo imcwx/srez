@@ -17,8 +17,8 @@
       <file leaf-file-name="srez_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="165" column="25" lean-forward="true" selection-start-line="165" selection-start-column="25" selection-end-line="165" selection-end-column="25" />
+            <state relative-caret-position="289">
+              <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -366,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510037437552</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="setting gpu limit">
+      <created>1510037582806</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1510037582806</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -419,7 +426,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test files" />
     <MESSAGE value="K = 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="K = 1" />
+    <MESSAGE value="setting gpu limit" />
+    <option name="LAST_COMMIT_MESSAGE" value="setting gpu limit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -803,8 +811,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="165" column="25" lean-forward="true" selection-start-line="165" selection-start-column="25" selection-end-line="165" selection-end-column="25" />
+        <state relative-caret-position="289">
+          <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding />
         </state>
       </provider>
