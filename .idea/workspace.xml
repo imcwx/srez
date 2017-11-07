@@ -17,8 +17,8 @@
       <file leaf-file-name="srez_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="75" column="4" lean-forward="true" selection-start-line="75" selection-start-column="4" selection-end-line="75" selection-end-column="4" />
+            <state relative-caret-position="213">
+              <caret line="28" column="33" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -115,7 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>predict</find>
       <find>demo</find>
       <find>dataset</find>
       <find>TrainData</find>
@@ -145,6 +144,7 @@
       <find>_downscale</find>
       <find>sample_size</find>
       <find>setup_tensorflow</find>
+      <find>check</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -331,7 +331,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510023646547</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="test files">
+      <created>1510025559535</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1510025559535</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -767,8 +774,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="75" column="4" lean-forward="true" selection-start-line="75" selection-start-column="4" selection-end-line="75" selection-end-column="4" />
+        <state relative-caret-position="213">
+          <caret line="28" column="33" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="33" />
           <folding />
         </state>
       </provider>

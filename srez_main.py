@@ -7,6 +7,9 @@ import srez_model
 import srez_train
 import srez_test
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
+
 import sys
 import os.path
 import random
@@ -153,7 +156,6 @@ def prepare_test16_dir():
 
 
 def setup_tensorflow():
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
     # Create session
     config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement, device_count={'GPU': 2})
     # config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
