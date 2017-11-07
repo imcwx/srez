@@ -156,8 +156,9 @@ def setup_tensorflow():
     os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
     # Create session
     config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement, device_count={'GPU': 2})
-    config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
+    # config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
     config.gpu_options.allow_growth = FLAGS.allow_gpu_growth
+    config.gpu_options.per_process_gpu_memory_fraction = 0.80
     sess = tf.Session(config=config)
     # tf.device('/gpu:1')
 
