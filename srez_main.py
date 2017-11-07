@@ -157,11 +157,11 @@ def prepare_test16_dir():
 
 def setup_tensorflow():
     # Create session
-    config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement, device_count={'GPU': 2})
-    # config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
+    # config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement, device_count={'GPU': 2})
+    config = tf.ConfigProto(log_device_placement=FLAGS.log_device_placement)
     config.gpu_options.allow_growth = FLAGS.allow_gpu_growth
     config.gpu_options.per_process_gpu_memory_fraction = 0.80
-    # config.gpu_options.allocator_type = 'BFC'
+    config.gpu_options.allocator_type = 'BFC'
     sess = tf.Session(config=config)
     # tf.device('/gpu:1')
 
