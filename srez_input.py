@@ -75,9 +75,9 @@ def test_inputs(sess, filenames, size, image_size=None, capacity_factor=3):
 
     # off_x, off_y = 25, 60
     off_x, off_y = 0, 0
-    # crop_size = 128
+    crop_size = 128
     # crop_size = 64
-    crop_size = 32
+    # crop_size = 32
     # crop_size = FLAGS.crop_size
     crop_size_plus = crop_size
     image = tf.image.crop_to_bounding_box(image, off_y, off_x, crop_size_plus, crop_size_plus)

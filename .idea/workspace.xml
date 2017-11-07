@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="241c3d56-5c9a-4c6e-82e2-a1d70fb3cc91" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_input.py" afterPath="$PROJECT_DIR$/srez_input.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_main.py" afterPath="$PROJECT_DIR$/srez_main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +18,8 @@
       <file leaf-file-name="srez_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="87" column="44" lean-forward="false" selection-start-line="87" selection-start-column="44" selection-end-line="87" selection-end-column="44" />
+            <state relative-caret-position="354">
+              <caret line="87" column="43" lean-forward="false" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -27,8 +28,8 @@
       <file leaf-file-name="srez_input.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srez_input.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="58" column="40" lean-forward="false" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="40" />
+            <state relative-caret-position="354">
+              <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -296,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510020946292</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="test files">
+      <created>1510022056850</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1510022056850</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -724,16 +732,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_input.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="58" column="40" lean-forward="false" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="40" />
+        <state relative-caret-position="354">
+          <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="87" column="44" lean-forward="false" selection-start-line="87" selection-start-column="44" selection-end-line="87" selection-end-column="44" />
+        <state relative-caret-position="354">
+          <caret line="87" column="43" lean-forward="false" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
           <folding />
         </state>
       </provider>
