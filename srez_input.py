@@ -91,7 +91,7 @@ def test_inputs(sess, filenames, size, image_size=None, capacity_factor=3):
 
     # The feature is simply a Kx downscaled version
     # K = 4
-    K = 4
+    K = 1
     downsampled = tf.image.resize_area(image, [image_size // K, image_size // K])
 
     feature = tf.reshape(downsampled, [image_size // K, image_size // K, 3])
