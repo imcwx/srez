@@ -85,6 +85,11 @@ tf.app.flags.DEFINE_string('predict_dir', 'predict',
 tf.app.flags.DEFINE_string('allow_gpu_growth', True,
                            "Set whether to allow GPU growth.")
 
+tf.app.flags.DEFINE_integer('test_size', 32,
+                            "Image test size in pixels")
+
+tf.app.flags.DEFINE_integer('crop_size', 32,
+                            "Image test size in pixels")
 
 
 def prepare_dirs(delete_train_dir=False):

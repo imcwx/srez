@@ -36,6 +36,7 @@ def setup_inputs(sess, filenames, image_size=None, capacity_factor=3):
 
     # The feature is simply a Kx downscaled version
     K = 4
+
     downsampled = tf.image.resize_area(image, [image_size // K, image_size // K])
 
     feature = tf.reshape(downsampled, [image_size // K, image_size // K, 3])
@@ -54,8 +55,11 @@ def setup_inputs(sess, filenames, image_size=None, capacity_factor=3):
 
 
 def test_inputs(sess, filenames, size, image_size=None, capacity_factor=3):
+    # if image_size is None:
+    #     image_size = FLAGS.sample_size
+
     if image_size is None:
-        image_size = FLAGS.sample_size
+        image_size = FLAGS.test_size
 
     # Read each JPEG file
     reader = tf.WholeFileReader()
@@ -74,6 +78,7 @@ def test_inputs(sess, filenames, size, image_size=None, capacity_factor=3):
     # crop_size = 128
     # crop_size = 64
     crop_size = 32
+    # crop_size = FLAGS.crop_size
     crop_size_plus = crop_size
     image = tf.image.crop_to_bounding_box(image, off_y, off_x, crop_size_plus, crop_size_plus)
 
