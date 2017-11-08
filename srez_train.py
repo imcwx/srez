@@ -11,15 +11,6 @@ def _summarize_progress(train_data, feature, label, gene_output, batch, suffix, 
 
     size = [label.shape[1], label.shape[2]]
 
-    # print("train_data : ")
-    # print(train_data)
-    # print("feature : ")
-    # print(feature)
-    # print("gene_output : ")
-    # print(gene_output)
-    # print("size : ")
-    # print(size)
-
     nearest = tf.image.resize_nearest_neighbor(feature, size)
     nearest = tf.maximum(tf.minimum(nearest, 1.0), 0.0)
 
@@ -38,6 +29,7 @@ def _summarize_progress(train_data, feature, label, gene_output, batch, suffix, 
     filename = os.path.join(FLAGS.train_dir, filename)
     scipy.misc.toimage(image, cmin=0., cmax=1.).save(filename)
     print("    Saved %s" % (filename,))
+
 
 def _save_checkpoint(train_data, batch):
     td = train_data
@@ -107,7 +99,7 @@ def train_model(train_data):
             
             # Update learning rate
             if batch % FLAGS.learning_rate_half_life == 0:
-                lrval *= .5
+                lrval *= FLAGS.learning_rate_reduction
 
         if batch % FLAGS.summary_period == 0:
             # Show progress with test features
