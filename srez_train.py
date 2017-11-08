@@ -22,7 +22,9 @@ def _summarize_progress(train_data, feature, label, gene_output, batch, suffix, 
     image   = tf.concat([nearest, bicubic, clipped, label] , 2)
 
     image = image[0:max_samples,:,:,:]
-    image = tf.concat([image[i,:,:,:] for i in range(max_samples)] , 0)
+    image = tf.concat([image[i,:,:,:] for i in range(max_samples)], 0)
+
+    # RUN
     image = td.sess.run(image)
 
     filename = 'batch%06d_%s.png' % (batch, suffix)
@@ -32,6 +34,7 @@ def _summarize_progress(train_data, feature, label, gene_output, batch, suffix, 
 
 
 def _save_checkpoint(train_data, batch):
+    # Should consider storing previous checkpoints, like moving into another folder with timestamp?
     td = train_data
 
     oldname = 'checkpoint_old.txt'
