@@ -75,7 +75,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 32,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 240,
+tf.app.flags.DEFINE_integer('train_time', 360,
                             "Time in minutes to train the model")
 # 20
 

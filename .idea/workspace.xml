@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="241c3d56-5c9a-4c6e-82e2-a1d70fb3cc91" name="Default" comment="24 hours run">
+    <list default="true" id="241c3d56-5c9a-4c6e-82e2-a1d70fb3cc91" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_main.py" afterPath="$PROJECT_DIR$/srez_main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_train.py" afterPath="$PROJECT_DIR$/srez_train.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,8 +17,8 @@
       <file leaf-file-name="srez_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="80" column="0" lean-forward="true" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+            <state relative-caret-position="289">
+              <caret line="77" column="45" lean-forward="false" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -388,7 +387,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510054606142</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="4 hours, 0.91 learning rate to achieve 1/256 reduction by 4hours. increased checkpoint and batch image output rate.">
+      <created>1510119487646</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1510119487646</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -444,7 +450,8 @@
     <MESSAGE value="setting gpu limit" />
     <MESSAGE value="flagss" />
     <MESSAGE value="24 hours run" />
-    <option name="LAST_COMMIT_MESSAGE" value="24 hours run" />
+    <MESSAGE value="4 hours, 0.91 learning rate to achieve 1/256 reduction by 4hours. increased checkpoint and batch image output rate." />
+    <option name="LAST_COMMIT_MESSAGE" value="4 hours, 0.91 learning rate to achieve 1/256 reduction by 4hours. increased checkpoint and batch image output rate." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -828,8 +835,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="80" column="0" lean-forward="true" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+        <state relative-caret-position="289">
+          <caret line="77" column="45" lean-forward="false" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
           <folding />
         </state>
       </provider>
