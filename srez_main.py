@@ -19,14 +19,14 @@ import tensorflow as tf
 FLAGS = tf.app.flags.FLAGS
 
 # Configuration (alphabetically)
-tf.app.flags.DEFINE_integer('batch_size', 32,
+tf.app.flags.DEFINE_integer('batch_size', 16,
                             "Number of samples per batch.")
 # 16
 
 tf.app.flags.DEFINE_string('checkpoint_dir', 'checkpoint',
                            "Output folder where checkpoints are dumped.")
 
-tf.app.flags.DEFINE_integer('checkpoint_period', 15000,
+tf.app.flags.DEFINE_integer('checkpoint_period', 30000,
                             "Number of batches in between checkpoints")
 
 tf.app.flags.DEFINE_string('dataset', 'data',
@@ -42,7 +42,7 @@ tf.app.flags.DEFINE_string('run', 'demo',
 tf.app.flags.DEFINE_float('gene_l1_factor', .90,
                           "Multiplier for generator L1 loss term")
 
-tf.app.flags.DEFINE_float('learning_beta1', 0.5,
+tf.app.flags.DEFINE_float('learning_beta1', 0.9,
                           "Beta1 parameter used for AdamOptimizer")
 # 0.5
 
@@ -67,7 +67,7 @@ tf.app.flags.DEFINE_integer('summary_period', 500,
 tf.app.flags.DEFINE_integer('random_seed', 0,
                             "Seed used to initialize rng.")
 
-tf.app.flags.DEFINE_integer('test_vectors', 32,
+tf.app.flags.DEFINE_integer('test_vectors', 16,
                             """Number of features to use for testing""")
 # 16
                             
