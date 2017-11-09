@@ -6,6 +6,7 @@ import time
 
 FLAGS = tf.app.flags.FLAGS
 
+
 def _summarize_progress(train_data, feature, label, gene_output, batch, suffix, max_samples=8):
     td = train_data
 
@@ -62,6 +63,7 @@ def _save_checkpoint(train_data, batch):
     saver.save(td.sess, newname)
 
     print("    Checkpoint saved")
+
 
 def train_model(train_data):
     td = train_data

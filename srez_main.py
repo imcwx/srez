@@ -1,8 +1,6 @@
 import imageio
 imageio.plugins.ffmpeg.download()
 
-import os
-
 import srez_demo
 import srez_input
 import srez_model
@@ -44,8 +42,9 @@ tf.app.flags.DEFINE_string('run', 'demo',
 tf.app.flags.DEFINE_float('gene_l1_factor', .90,
                           "Multiplier for generator L1 loss term")
 
-tf.app.flags.DEFINE_float('learning_beta1', 0.5,
+tf.app.flags.DEFINE_float('learning_beta1', 0.9,
                           "Beta1 parameter used for AdamOptimizer")
+# 0.5
 
 tf.app.flags.DEFINE_float('learning_rate_start', 0.00020,
                           "Starting learning rate used for AdamOptimizer")
@@ -99,6 +98,7 @@ tf.app.flags.DEFINE_integer("learning_rate_reduction", 0.91,
                             "The fraction of reduction in learning rate.")
 # 0.5
 
+
 def prepare_dirs(delete_train_dir=False):
     # Create checkpoint dir (do not delete anything)
     if not tf.gfile.Exists(FLAGS.checkpoint_dir):
@@ -122,6 +122,7 @@ def prepare_dirs(delete_train_dir=False):
 
     return filenames
 
+
 def prepare_test_dir():
     # Check test dir Exist
     if not tf.gfile.Exists(FLAGS.test_dir) or \
@@ -139,6 +140,7 @@ def prepare_test_dir():
     filenames = [os.path.join(FLAGS.test_dir, f) for f in filenames]
 
     return filenames
+
 
 def prepare_test16_dir():
     # Check test dir Exist
