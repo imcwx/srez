@@ -26,7 +26,7 @@ tf.app.flags.DEFINE_integer('batch_size', 16,
 tf.app.flags.DEFINE_string('checkpoint_dir', 'checkpoint',
                            "Output folder where checkpoints are dumped.")
 
-tf.app.flags.DEFINE_integer('checkpoint_period', 30000,
+tf.app.flags.DEFINE_integer('checkpoint_period', 20000,
                             "Number of batches in between checkpoints")
 
 tf.app.flags.DEFINE_string('dataset', 'data',
@@ -41,10 +41,12 @@ tf.app.flags.DEFINE_string('run', 'demo',
 
 tf.app.flags.DEFINE_float('gene_l1_factor', .90,
                           "Multiplier for generator L1 loss term")
+# 0.90
 
 tf.app.flags.DEFINE_float('learning_beta1', 0.9,
                           "Beta1 parameter used for AdamOptimizer")
 # 0.5
+# 0.9
 
 tf.app.flags.DEFINE_float('learning_rate_start', 0.00020,
                           "Starting learning rate used for AdamOptimizer")
@@ -52,11 +54,12 @@ tf.app.flags.DEFINE_float('learning_rate_start', 0.00020,
 tf.app.flags.DEFINE_integer('learning_rate_half_life', 1000,
                             "Number of batches until learning rate is halved")
 # 5000
+# 1000
 
 tf.app.flags.DEFINE_bool('log_device_placement', False,
                          "Log the device where variables are placed.")
 
-tf.app.flags.DEFINE_integer('sample_size', 128,
+tf.app.flags.DEFINE_integer('sample_size', 64,
                             "Image sample size in pixels. Range [64,128]")
 # 64
 
@@ -74,7 +77,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 16,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 360,
+tf.app.flags.DEFINE_integer('train_time', 180,
                             "Time in minutes to train the model")
 # 20
 
@@ -88,16 +91,16 @@ tf.app.flags.DEFINE_string('predict_dir', 'predict',
 tf.app.flags.DEFINE_boolean('allow_gpu_growth', True,
                             "Set whether to allow GPU growth.")
 
-tf.app.flags.DEFINE_integer('test_size', 32,
+tf.app.flags.DEFINE_integer('test_size', 16,
                             "Test pixel size in pixels")
 
-tf.app.flags.DEFINE_integer('crop_size', 32,
+tf.app.flags.DEFINE_integer('crop_size', 16,
                             "Image crop size in pixels")
 
 tf.app.flags.DEFINE_integer("learning_rate_reduction", 0.91,
                             "The fraction of reduction in learning rate.")
 # 0.5
-
+# 0.91
 
 def prepare_dirs(delete_train_dir=False):
     # Create checkpoint dir (do not delete anything)

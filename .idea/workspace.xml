@@ -17,8 +17,8 @@
       <file leaf-file-name="srez_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1000">
-              <caret line="79" column="0" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+            <state relative-caret-position="264">
+              <caret line="46" column="67" lean-forward="true" selection-start-line="46" selection-start-column="67" selection-end-line="46" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -99,8 +99,8 @@
       <file leaf-file-name="srez_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srez_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8228">
-              <caret line="485" column="38" lean-forward="false" selection-start-line="485" selection-start-column="38" selection-end-line="485" selection-end-column="38" />
+            <state relative-caret-position="522">
+              <caret line="36" column="90" lean-forward="true" selection-start-line="36" selection-start-column="90" selection-end-line="36" selection-end-column="90" />
               <folding />
             </state>
           </provider>
@@ -117,16 +117,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>lear</find>
-      <find>train</find>
-      <find>sample</find>
       <find>_downscale</find>
       <find>check</find>
       <find>test_size</find>
       <find>sampl</find>
       <find>sample_size`</find>
       <find>sample_size</find>
-      <find>test_vectors</find>
       <find>encoder</find>
       <find>covert</find>
       <find>close</find>
@@ -146,6 +142,10 @@
       <find>tf</find>
       <find>optim</find>
       <find>optimi</find>
+      <find>test</find>
+      <find>test_vectors</find>
+      <find>layer</find>
+      <find>conv</find>
       <find>gene_l1_factor</find>
     </findStrings>
     <replaceStrings>
@@ -191,8 +191,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -424,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510190950906</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="new version...">
+      <created>1510200838725</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1510200838725</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -485,7 +492,8 @@
     <MESSAGE value="change to 15k for each checkpoint. version 6. pleasee don't OOM" />
     <MESSAGE value="version 7, change adam optimizer." />
     <MESSAGE value="ignore previous commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="ignore previous commit." />
+    <MESSAGE value="new version..." />
+    <option name="LAST_COMMIT_MESSAGE" value="new version..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -847,14 +855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srez_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8228">
-          <caret line="485" column="38" lean-forward="false" selection-start-line="485" selection-start-column="38" selection-end-line="485" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srez_input.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -873,10 +873,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/srez_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="36" column="90" lean-forward="true" selection-start-line="36" selection-start-column="90" selection-end-line="36" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/srez_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="79" column="0" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        <state relative-caret-position="264">
+          <caret line="46" column="67" lean-forward="true" selection-start-line="46" selection-start-column="67" selection-end-line="46" selection-end-column="67" />
           <folding />
         </state>
       </provider>
