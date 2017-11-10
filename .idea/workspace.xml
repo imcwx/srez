@@ -17,8 +17,8 @@
       <file leaf-file-name="srez_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="46" column="67" lean-forward="true" selection-start-line="46" selection-start-column="67" selection-end-line="46" selection-end-column="67" />
+            <state relative-caret-position="281">
+              <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -431,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510200838725</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="version 8 ? - original with some twits.">
+      <created>1510294795515</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1510294795515</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -493,7 +500,8 @@
     <MESSAGE value="version 7, change adam optimizer." />
     <MESSAGE value="ignore previous commit." />
     <MESSAGE value="new version..." />
-    <option name="LAST_COMMIT_MESSAGE" value="new version..." />
+    <MESSAGE value="version 8 ? - original with some twits." />
+    <option name="LAST_COMMIT_MESSAGE" value="version 8 ? - original with some twits." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -883,8 +891,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="46" column="67" lean-forward="true" selection-start-line="46" selection-start-column="67" selection-end-line="46" selection-end-column="67" />
+        <state relative-caret-position="281">
+          <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding />
         </state>
       </provider>
