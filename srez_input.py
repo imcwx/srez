@@ -54,7 +54,7 @@ def setup_inputs(sess, filenames, image_size=None, capacity_factor=3):
     return features, labels
 
 
-def test_inputs(sess, filenames, size, image_size=None, capacity_factor=3):
+def test_inputs(sess, filenames, image_size=None, capacity_factor=3):
     # if image_size is None:
     #     image_size = FLAGS.sample_size
 

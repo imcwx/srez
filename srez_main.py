@@ -70,7 +70,7 @@ tf.app.flags.DEFINE_integer('summary_period', 500,
 tf.app.flags.DEFINE_integer('random_seed', 0,
                             "Seed used to initialize rng.")
 
-tf.app.flags.DEFINE_integer('test_vectors', 16,
+tf.app.flags.DEFINE_integer('test_vectors', 25000,
                             """Number of features to use for testing""")
 # 16
                             
@@ -249,11 +249,11 @@ def _test16(onefilename=False):
     elif os.path.isdir(onefilename):
         filenames = [f for f in os.listdir(onefilename) if os.path.isfile(os.path.join(onefilename, f))]
 
-    im = Image.open(onefilename)
-    size = im.size
+    # im = Image.open(onefilename)
+    # size = im.size
 
     # Setup async input queues
-    test_features, test_labels = srez_input.test_inputs(sess, filenames, size)
+    test_features, test_labels = srez_input.test_inputs(sess, filenames)
 
     # Create and initialize model
     [gene_minput, gene_moutput,
