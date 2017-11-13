@@ -3,6 +3,7 @@ import tensorflow as tf
 
 FLAGS = tf.app.flags.FLAGS
 
+
 class Model:
     """A neural network model.
 
