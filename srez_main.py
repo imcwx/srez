@@ -271,7 +271,7 @@ def _test16(onefilename=False):
     test_data = TrainData(locals())
     td = test_data
 
-    test_feature, test_label = td.sess.run([td.test_features, td.test_labels])
+    test_feature, test_label = td.sess.run([test_features, test_labels])
     feed_dict = {td.gene_minput: test_label}
     gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
 
