@@ -34,9 +34,10 @@ def predict(test_data, feature, label, gene_output, suffix="predicted", max_samp
 
 def predict_one(test_data, feature, label, gene_output):
     td = test_data
-    name = td.filenames[0]
-    name = os.path.basename(name)
-    name = os.path.splitext(name)[0]
+    # name = td.filenames[0]
+    # name = os.path.basename(name)
+    # name = os.path.splitext(name)[0]
+    name = "202295_16"
 
     size = [label.shape[1], label.shape[2]]
 
