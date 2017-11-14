@@ -243,7 +243,7 @@ def _test16(onefilename=False):
     # Setup global tensorflow state
     sess, summary_writer = setup_tensorflow()
 
-    # Prepare directories
+    # Prepare directories (NOT WORKING, can can do filename))
     if os.path.isfile(onefilename):
         filenames = [onefilename]
     elif os.path.isdir(onefilename):

@@ -56,6 +56,7 @@ def predict_one(test_data, feature, label, gene_output):
 
     image = tf.concat([clipped], 2)
     image = image[0, :, :, :]
+
     image = td.sess.run(image)
 
     filename = '%s_predicted.png' % name

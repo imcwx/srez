@@ -4,6 +4,9 @@ import scipy.misc
 import tensorflow as tf
 import time
 
+import srez_input
+import srez_test
+
 FLAGS = tf.app.flags.FLAGS
 
 
@@ -111,6 +114,13 @@ def train_model(train_data):
             feed_dict = {td.gene_minput: test_feature}
             gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
             _summarize_progress(td, test_feature, test_label, gene_output, batch, 'out')
+
+            one_features, one_labels = srez_input.test_inputs(td.sess, "test/202295_16.jpg")
+            one_feature, one_label = td.sess.run([td.one_features, td.one_labels])
+            feed_dict = {td.gene_minput: one_feature}
+            gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
+            srez_test.predict_one(td, one_feature, one_label, gene_output)
+
             
         if batch % FLAGS.checkpoint_period == 0:
             # Save checkpoint
