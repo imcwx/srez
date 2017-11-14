@@ -119,7 +119,7 @@ def train_model(train_data):
             one_feature, one_label = td.sess.run([td.test_features, td.test_labels])
             feed_dict = {td.gene_minput: one_feature}
             gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
-            srez_test.predict_one(td, one_feature, one_label, gene_output)
+            srez_test.predict_one(td, one_feature, one_label, gene_output, batch)
 
             
         if batch % FLAGS.checkpoint_period == 0:
