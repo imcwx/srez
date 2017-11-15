@@ -247,7 +247,7 @@ def _test16(onefilename=False):
     if os.path.isfile(onefilename):
         filenames = [onefilename]
     elif os.path.isdir(onefilename):
-        filenames = [f for f in os.listdir(onefilename) if os.path.isfile(os.path.join(onefilename, f))]
+        filenames = [os.path.join(onefilename, f) for f in os.listdir(onefilename) if os.path.isfile(os.path.join(onefilename, f))]
 
     # im = Image.open(onefilename)
     # size = im.size
