@@ -5,7 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_main.py" afterPath="$PROJECT_DIR$/srez_main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_model.py" afterPath="$PROJECT_DIR$/srez_model.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_test.py" afterPath="$PROJECT_DIR$/srez_test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,11 +30,9 @@
       <file leaf-file-name="srez_main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srez_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1700">
-              <caret line="100" column="0" lean-forward="true" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#16#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="102">
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -43,8 +40,8 @@
       <file leaf-file-name="srez_model.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="367" column="35" lean-forward="true" selection-start-line="367" selection-start-column="35" selection-end-line="367" selection-end-column="35" />
+            <state relative-caret-position="82">
+              <caret line="328" column="15" lean-forward="false" selection-start-line="328" selection-start-column="15" selection-end-line="328" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -123,7 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>e</find>
       <find>train_mode</find>
       <find>FileWriter</find>
       <find>random_seed</find>
@@ -153,6 +149,7 @@
       <find>td.fil</find>
       <find>norm</find>
       <find>conv</find>
+      <find>stride</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -550,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510715467916</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="version 2.0 : add a layer res unit = [ 512, 256, 128, 96]">
+      <created>1510740557310</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1510740557310</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -623,7 +627,8 @@
     <MESSAGE value="v10 crazy: spelling" />
     <MESSAGE value="v10 crazy: directory" />
     <MESSAGE value="v10 crazy: directory []" />
-    <option name="LAST_COMMIT_MESSAGE" value="v10 crazy: directory []" />
+    <MESSAGE value="version 2.0 : add a layer res unit = [ 512, 256, 128, 96]" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 2.0 : add a layer res unit = [ 512, 256, 128, 96]" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -670,9 +675,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -750,9 +753,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -805,9 +806,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -830,9 +829,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1003,16 +1000,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srez_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="100" column="0" lean-forward="true" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srez_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1023,10 +1010,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/srez_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/srez_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="367" column="35" lean-forward="true" selection-start-line="367" selection-start-column="35" selection-end-line="367" selection-end-column="35" />
+        <state relative-caret-position="82">
+          <caret line="328" column="15" lean-forward="false" selection-start-line="328" selection-start-column="15" selection-end-line="328" selection-end-column="15" />
           <folding />
         </state>
       </provider>

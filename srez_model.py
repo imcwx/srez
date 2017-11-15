@@ -325,7 +325,8 @@ class Model:
 
 def _discriminator_model(sess, features, disc_input):
     # Fully convolutional model
-    mapsize = 3
+    # mapsize = 3
+    mapsize = 4
     layers  = [64, 128, 256, 512]
 
     old_vars = tf.global_variables()
@@ -336,22 +337,22 @@ def _discriminator_model(sess, features, disc_input):
         nunits = layers[layer]
         stddev_factor = 2.0
 
-        model.add_conv2d(nunits, mapsize=mapsize, stride=2, stddev_factor=stddev_factor)
+        model.add_conv2d(nunits, mapsize=mapsize, stride=4, stddev_factor=stddev_factor)
         model.add_batch_norm()
         model.add_relu()
 
     # Finalization a la "all convolutional net"
-    model.add_conv2d(nunits, mapsize=mapsize, stride=1, stddev_factor=stddev_factor)
+    model.add_conv2d(nunits, mapsize=mapsize, stride=2, stddev_factor=stddev_factor)
     model.add_batch_norm()
     model.add_relu()
 
-    model.add_conv2d(nunits, mapsize=1, stride=1, stddev_factor=stddev_factor)
+    model.add_conv2d(nunits, mapsize=1, stride=2, stddev_factor=stddev_factor)
     model.add_batch_norm()
     model.add_relu()
 
     # Linearly map to real/fake and return average score
     # (softmax will be applied later)
-    model.add_conv2d(1, mapsize=1, stride=1, stddev_factor=stddev_factor)
+    model.add_conv2d(1, mapsize=1, stride=2, stddev_factor=stddev_factor)
     model.add_mean()
 
     new_vars  = tf.global_variables()
@@ -363,9 +364,10 @@ def _discriminator_model(sess, features, disc_input):
 def _generator_model(sess, features, labels, channels):
     # Upside-down all-convolutional resnet
 
-    mapsize = 3
-    # res_units  = [256, 128, 96]
-    res_units = [512, 256, 128, 96]
+    # mapsize = 3
+    mapsize = 4
+    res_units  = [256, 128, 96]
+    # res_units = [512, 256, 128, 96]
 
     old_vars = tf.global_variables()
 
@@ -384,20 +386,20 @@ def _generator_model(sess, features, labels, channels):
         
         model.add_batch_norm()
         model.add_relu()
-        model.add_conv2d_transpose(nunits, mapsize=mapsize, stride=1, stddev_factor=1.)
+        model.add_conv2d_transpose(nunits, mapsize=mapsize, stride=2, stddev_factor=1.)
 
     # Finalization a la "all convolutional net"
     nunits = res_units[-1]
-    model.add_conv2d(nunits, mapsize=mapsize, stride=1, stddev_factor=2.)
+    model.add_conv2d(nunits, mapsize=mapsize, stride=2, stddev_factor=2.)
     # Worse: model.add_batch_norm()
     model.add_relu()
 
-    model.add_conv2d(nunits, mapsize=1, stride=1, stddev_factor=2.)
+    model.add_conv2d(nunits, mapsize=1, stride=2, stddev_factor=2.)
     # Worse: model.add_batch_norm()
     model.add_relu()
 
     # Last layer is sigmoid with no batch normalization
-    model.add_conv2d(channels, mapsize=1, stride=1, stddev_factor=1.)
+    model.add_conv2d(channels, mapsize=1, stride=2, stddev_factor=1.)
     model.add_sigmoid()
     
     new_vars  = tf.global_variables()

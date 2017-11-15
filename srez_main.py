@@ -16,7 +16,7 @@ import tensorflow as tf
 FLAGS = tf.app.flags.FLAGS
 
 # Configuration (alphabetically)
-tf.app.flags.DEFINE_integer('batch_size', 32,
+tf.app.flags.DEFINE_integer('batch_size', 16,
                             "Number of samples per batch.")
 # 16
 
@@ -25,6 +25,7 @@ tf.app.flags.DEFINE_string('checkpoint_dir', 'checkpoint',
 
 tf.app.flags.DEFINE_integer('checkpoint_period', 20000,
                             "Number of batches in between checkpoints")
+# 10000
 
 tf.app.flags.DEFINE_string('dataset', 'data',
                            "Path to the dataset directory.")
@@ -74,7 +75,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 25000,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 180,
+tf.app.flags.DEFINE_integer('train_time', 360,
                             "Time in minutes to train the model")
 # 20
 
