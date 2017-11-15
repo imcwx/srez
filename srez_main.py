@@ -269,7 +269,7 @@ def _test16(onefilename=False):
     saver.restore(sess, filename)
 
     for file in filenames:
-        test_features, test_labels = srez_input.test_inputs(sess, file)
+        test_features, test_labels = srez_input.test_inputs(sess, [file])
 
         # test_data = TrainData(locals())
         # td = test_data
