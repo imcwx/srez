@@ -35,9 +35,9 @@ def predict(test_data, feature, label, gene_output, suffix="predicted", max_samp
 def predict_one(test_data, feature, label, gene_output, batch=""):
     td = test_data
 
-    for i in td.filnames:
+    for name in td.filenames:
 
-        name = td.filenames[i]
+        # name = td.filenames[i]
         name = os.path.basename(name)
         name = os.path.splitext(name)[0]
         # name = "202295_16_" + str(batch)
