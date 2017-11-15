@@ -268,14 +268,17 @@ def _test16(onefilename=False):
 
     saver.restore(sess, filename)
 
-    test_data = TrainData(locals())
-    td = test_data
+    for file in filenames:
+        test_features, test_labels = srez_input.test_inputs(sess, file)
 
-    test_feature, test_label = td.sess.run([test_features, test_labels])
-    feed_dict = {td.gene_minput: test_label}
-    gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
+        # test_data = TrainData(locals())
+        # td = test_data
 
-    srez_test.predict_one(test_data, test_feature, test_label, gene_output)
+        test_feature, test_label = sess.run([test_features, test_labels])
+        feed_dict = {gene_minput: test_label}
+        gene_output = sess.run(gene_moutput, feed_dict=feed_dict)
+
+        srez_test.predict_one(sess, test_feature, test_label, gene_output, file)
 
 
 def _demo():

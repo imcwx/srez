@@ -32,38 +32,38 @@ def predict(test_data, feature, label, gene_output, suffix="predicted", max_samp
     print("    Saved %s" % (filename,))
 
 
-def predict_one(test_data, feature, label, gene_output, batch=""):
-    td = test_data
+def predict_one(sess, feature, label, gene_output, filename):
+    # td = test_data
+    # for name in td.filenames:
 
-    for name in td.filenames:
+    name = filename
+    name = os.path.basename(name)
+    name = os.path.splitext(name)[0]
 
-        # name = td.filenames[i]
-        name = os.path.basename(name)
-        name = os.path.splitext(name)[0]
-        # name = "202295_16_" + str(batch)
+    size = [label.shape[1], label.shape[2]]
 
-        size = [label.shape[1], label.shape[2]]
+    nearest = tf.image.resize_nearest_neighbor(feature, size)
+    nearest = tf.maximum(tf.minimum(nearest, 1.0), 0.0)
 
-        nearest = tf.image.resize_nearest_neighbor(feature, size)
-        nearest = tf.maximum(tf.minimum(nearest, 1.0), 0.0)
+    image = tf.concat([nearest], 2)
+    image = image[0, :, :, :]
+    # image = td.sess.run(image)
+    image = sess.run(image)
 
-        image = tf.concat([nearest], 2)
-        image = image[0, :, :, :]
-        image = td.sess.run(image)
+    filename = '%s_resize.png' % name
+    filename = os.path.join(FLAGS.predict_dir, filename)
+    scipy.misc.toimage(image, cmin=0., cmax=1.).save(filename)
+    print("    Saved %s" % (filename,))
 
-        filename = '%s_resize.png' % name
-        filename = os.path.join(FLAGS.predict_dir, filename)
-        scipy.misc.toimage(image, cmin=0., cmax=1.).save(filename)
-        print("    Saved %s" % (filename,))
+    clipped = tf.maximum(tf.minimum(gene_output, 1.0), 0.0)
 
-        clipped = tf.maximum(tf.minimum(gene_output, 1.0), 0.0)
+    image = tf.concat([clipped], 2)
+    image = image[0, :, :, :]
 
-        image = tf.concat([clipped], 2)
-        image = image[0, :, :, :]
+    # image = td.sess.run(image)
+    image = sess.run(image)
 
-        image = td.sess.run(image)
-
-        filename = '%s_predicted.png' % name
-        filename = os.path.join(FLAGS.predict_dir, filename)
-        scipy.misc.toimage(image, cmin=0., cmax=1.).save(filename)
-        print("    Saved %s" % (filename,))
+    filename = '%s_predicted.png' % name
+    filename = os.path.join(FLAGS.predict_dir, filename)
+    scipy.misc.toimage(image, cmin=0., cmax=1.).save(filename)
+    print("    Saved %s" % (filename,))
