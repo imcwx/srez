@@ -322,6 +322,7 @@ class Model:
         scope = self._get_layer_str(layer)
         return tf.get_collection(tf.GraphKeys.VARIABLES, scope=scope)
 
+
 def _discriminator_model(sess, features, disc_input):
     # Fully convolutional model
     mapsize = 3
@@ -358,11 +359,13 @@ def _discriminator_model(sess, features, disc_input):
 
     return model.get_output(), disc_vars
 
+
 def _generator_model(sess, features, labels, channels):
     # Upside-down all-convolutional resnet
 
     mapsize = 3
-    res_units  = [256, 128, 96]
+    # res_units  = [256, 128, 96]
+    res_units = [512, 256, 128, 96]
 
     old_vars = tf.global_variables()
 
@@ -402,6 +405,7 @@ def _generator_model(sess, features, labels, channels):
 
     return model.get_output(), gene_vars
 
+
 def create_model(sess, features, labels):
     # Generator
     rows      = int(features.get_shape()[1])
@@ -435,18 +439,20 @@ def create_model(sess, features, labels):
             gene_output,      gene_var_list,
             disc_real_output, disc_fake_output, disc_var_list]
 
+
 def _downscale(images, K):
     """Differentiable image downscaling by a factor of K"""
     arr = np.zeros([K, K, 3, 3])
     arr[:,:,0,0] = 1.0/(K*K)
     arr[:,:,1,1] = 1.0/(K*K)
     arr[:,:,2,2] = 1.0/(K*K)
-    dowscale_weight = tf.constant(arr, dtype=tf.float32)
+    downscale_weight = tf.constant(arr, dtype=tf.float32)
     
-    downscaled = tf.nn.conv2d(images, dowscale_weight,
+    downscaled = tf.nn.conv2d(images, downscale_weight,
                               strides=[1, K, K, 1],
                               padding='SAME')
     return downscaled
+
 
 def create_generator_loss(disc_output, gene_output, features):
     # I.e. did we fool the discriminator?
@@ -466,6 +472,7 @@ def create_generator_loss(disc_output, gene_output, features):
     
     return gene_loss
 
+
 def create_discriminator_loss(disc_real_output, disc_fake_output):
     # I.e. did we correctly identify the input as real or not?
     # cross_entropy_real = tf.nn.sigmoid_cross_entropy_with_logits(disc_real_output, tf.ones_like(disc_real_output))
@@ -477,6 +484,7 @@ def create_discriminator_loss(disc_real_output, disc_fake_output):
     disc_fake_loss     = tf.reduce_mean(cross_entropy_fake, name='disc_fake_loss')
 
     return disc_real_loss, disc_fake_loss
+
 
 def create_optimizers(gene_loss, gene_var_list,
                       disc_loss, disc_var_list):    
@@ -495,4 +503,4 @@ def create_optimizers(gene_loss, gene_var_list,
     
     disc_minimize     = disc_opti.minimize(disc_loss, var_list=disc_var_list, name='disc_loss_minimize', global_step=global_step)
     
-    return (global_step, learning_rate, gene_minimize, disc_minimize)
+    return global_step, learning_rate, gene_minimize, disc_minimize

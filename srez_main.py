@@ -1,6 +1,3 @@
-import imageio
-imageio.plugins.ffmpeg.download()
-
 import srez_demo
 import srez_input
 import srez_model
@@ -11,15 +8,15 @@ import sys
 import os.path
 import random
 import numpy as np
-import numpy.random
-
+import imageio
 from PIL import Image
+
 import tensorflow as tf
 
 FLAGS = tf.app.flags.FLAGS
 
 # Configuration (alphabetically)
-tf.app.flags.DEFINE_integer('batch_size', 16,
+tf.app.flags.DEFINE_integer('batch_size', 32,
                             "Number of samples per batch.")
 # 16
 
@@ -37,13 +34,13 @@ tf.app.flags.DEFINE_float('epsilon', 1e-8,
                           "Fuzz term to avoid numerical instability")
 
 tf.app.flags.DEFINE_string('run', 'demo',
-                            "Which operation to run. [demo|train|test]")
+                           "Which operation to run [demo|train|test].")
 
 tf.app.flags.DEFINE_float('gene_l1_factor', .90,
                           "Multiplier for generator L1 loss term")
 # 0.90
 
-tf.app.flags.DEFINE_float('learning_beta1', 0.5,
+tf.app.flags.DEFINE_float('learning_beta1', 0.9,
                           "Beta1 parameter used for AdamOptimizer")
 # 0.5
 # 0.9
@@ -51,7 +48,7 @@ tf.app.flags.DEFINE_float('learning_beta1', 0.5,
 tf.app.flags.DEFINE_float('learning_rate_start', 0.00020,
                           "Starting learning rate used for AdamOptimizer")
 
-tf.app.flags.DEFINE_integer('learning_rate_half_life', 5000,
+tf.app.flags.DEFINE_integer('learning_rate_half_life', 2500,
                             "Number of batches until learning rate is halved")
 # 5000
 # 1000
@@ -59,7 +56,7 @@ tf.app.flags.DEFINE_integer('learning_rate_half_life', 5000,
 tf.app.flags.DEFINE_bool('log_device_placement', False,
                          "Log the device where variables are placed.")
 
-tf.app.flags.DEFINE_integer('sample_size', 64,
+tf.app.flags.DEFINE_integer('sample_size', 128,
                             "Image sample size in pixels. Range [64,128]")
 # 64
 
@@ -73,7 +70,7 @@ tf.app.flags.DEFINE_integer('random_seed', 0,
 tf.app.flags.DEFINE_integer('test_vectors', 25000,
                             """Number of features to use for testing""")
 # 16
-                            
+
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
@@ -91,22 +88,23 @@ tf.app.flags.DEFINE_string('predict_dir', 'predict',
 tf.app.flags.DEFINE_boolean('allow_gpu_growth', True,
                             "Set whether to allow GPU growth.")
 
-tf.app.flags.DEFINE_integer('test_size', 16,
+tf.app.flags.DEFINE_integer('test_size', 32,
                             "Test pixel size in pixels")
 
-tf.app.flags.DEFINE_integer('crop_size', 16,
+tf.app.flags.DEFINE_integer('crop_size', 32,
                             "Image crop size in pixels")
 
-tf.app.flags.DEFINE_integer("learning_rate_reduction", 0.5,
+tf.app.flags.DEFINE_integer("learning_rate_reduction", 0.90,
                             "The fraction of reduction in learning rate.")
 # 0.5
 # 0.91
+
 
 def prepare_dirs(delete_train_dir=False):
     # Create checkpoint dir (do not delete anything)
     if not tf.gfile.Exists(FLAGS.checkpoint_dir):
         tf.gfile.MakeDirs(FLAGS.checkpoint_dir)
-    
+
     # Cleanup train dir
     if delete_train_dir:
         if tf.gfile.Exists(FLAGS.train_dir):
@@ -115,7 +113,7 @@ def prepare_dirs(delete_train_dir=False):
 
     # Return names of training files
     if not tf.gfile.Exists(FLAGS.dataset) or \
-       not tf.gfile.IsDirectory(FLAGS.dataset):
+            not tf.gfile.IsDirectory(FLAGS.dataset):
         raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.dataset,))
 
     filenames = tf.gfile.ListDirectory(FLAGS.dataset)
@@ -129,7 +127,7 @@ def prepare_dirs(delete_train_dir=False):
 def prepare_test_dir():
     # Check test dir Exist
     if not tf.gfile.Exists(FLAGS.test_dir) or \
-       not tf.gfile.IsDirectory(FLAGS.test_dir):
+            not tf.gfile.IsDirectory(FLAGS.test_dir):
         raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.test_dir,))
 
     # Check predict dir Exist
@@ -148,7 +146,7 @@ def prepare_test_dir():
 def prepare_test16_dir():
     # Check test dir Exist
     if not tf.gfile.Exists(FLAGS.test_dir16) or \
-       not tf.gfile.IsDirectory(FLAGS.test_dir16):
+            not tf.gfile.IsDirectory(FLAGS.test_dir16):
         raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.test_dir16,))
 
     # Check predict dir Exist
@@ -177,7 +175,7 @@ def setup_tensorflow():
     # Initialize rng with a deterministic seed
     with sess.graph.as_default():
         tf.set_random_seed(FLAGS.random_seed)
-        
+
     random.seed(FLAGS.random_seed)
     np.random.seed(FLAGS.random_seed)
 
@@ -221,9 +219,9 @@ def _test(onefilename=False):
 
     test_data = TrainData(locals())
     td = test_data
-    test_feature, test_label = td.sess.run([td.test_features, td.test_labels])
-    feed_dict = {td.gene_minput: test_feature}
-    gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
+    test_feature, test_label = sess.run([test_features, test_labels])
+    feed_dict = {gene_minput: test_feature}
+    gene_output = sess.run(gene_moutput, feed_dict=feed_dict)
 
     if onefilename:
         srez_test.predict_one(test_data, gene_output)
@@ -243,11 +241,12 @@ def _test16(onefilename=False):
     # Setup global tensorflow state
     sess, summary_writer = setup_tensorflow()
 
-    # Prepare directories (NOT WORKING, can can do filename))
+    # Prepare directories
     if os.path.isfile(onefilename):
         filenames = [onefilename]
     elif os.path.isdir(onefilename):
-        filenames = [os.path.join(onefilename, f) for f in os.listdir(onefilename) if os.path.isfile(os.path.join(onefilename, f))]
+        filenames = [os.path.join(onefilename, f) for f in os.listdir(onefilename) if
+                     os.path.isfile(os.path.join(onefilename, f))]
 
     # im = Image.open(onefilename)
     # size = im.size
@@ -270,9 +269,6 @@ def _test16(onefilename=False):
 
     for file in filenames:
         test_features, test_labels = srez_input.test_inputs(sess, [file])
-
-        # test_data = TrainData(locals())
-        # td = test_data
 
         test_feature, test_label = sess.run([test_features, test_labels])
         feed_dict = {gene_minput: test_label}
@@ -299,7 +295,7 @@ def _demo():
     [gene_minput, gene_moutput,
      gene_output, gene_var_list,
      disc_real_output, disc_fake_output, disc_var_list] = \
-            srez_model.create_model(sess, features, labels)
+        srez_model.create_model(sess, features, labels)
 
     # Restore variables from checkpoint
     saver = tf.train.Saver()
@@ -316,6 +312,7 @@ class TrainData(object):
     def __init__(self, dictionary):
         self.__dict__.update(dictionary)
 
+
 def _train():
     # Setup global tensorflow state
     sess, summary_writer = setup_tensorflow()
@@ -326,13 +323,13 @@ def _train():
 
     # Separate training and test sets
     train_filenames = all_filenames[:-FLAGS.test_vectors]
-    test_filenames  = all_filenames[-FLAGS.test_vectors:]
+    test_filenames = all_filenames[-FLAGS.test_vectors:]
 
     # TBD: Maybe download dataset here
 
     # Setup async input queues
     train_features, train_labels = srez_input.setup_inputs(sess, train_filenames)
-    test_features,  test_labels  = srez_input.setup_inputs(sess, test_filenames)
+    test_features, test_labels = srez_input.setup_inputs(sess, test_filenames)
 
     # Add some noise during training (think denoising autoencoders)
     noise_level = .03
@@ -343,32 +340,23 @@ def _train():
     [gene_minput, gene_moutput,
      gene_output, gene_var_list,
      disc_real_output, disc_fake_output, disc_var_list] = \
-            srez_model.create_model(sess, noisy_train_features, train_labels)
+        srez_model.create_model(sess, noisy_train_features, train_labels)
 
     gene_loss = srez_model.create_generator_loss(disc_fake_output, gene_output, train_features)
     disc_real_loss, disc_fake_loss = \
-                     srez_model.create_discriminator_loss(disc_real_output, disc_fake_output)
+        srez_model.create_discriminator_loss(disc_real_output, disc_fake_output)
     disc_loss = tf.add(disc_real_loss, disc_fake_loss, name='disc_loss')
-    
+
     (global_step, learning_rate, gene_minimize, disc_minimize) = \
-            srez_model.create_optimizers(gene_loss, gene_var_list,
-                                         disc_loss, disc_var_list)
+        srez_model.create_optimizers(gene_loss, gene_var_list,
+                                     disc_loss, disc_var_list)
 
     # Train model
     train_data = TrainData(locals())
     srez_train.train_model(train_data)
 
+
 def main(argv=None):
-    # Training or showing off?
-    # _train()
-    # _demo()
-    # _test()
-    # _test16("C:/GitProjects/srez/test_down/202597.jpg")
-    # _test16("C:/GitProjects/srez/test/202597.jpg")
-
-    # filename = sys.argv[1]
-    # _test16(filename)
-
     if len(sys.argv) == 2:
         filename = sys.argv[1]
         _test16(filename)
@@ -382,4 +370,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-  tf.app.run()
+    tf.app.run()
