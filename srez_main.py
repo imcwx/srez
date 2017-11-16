@@ -180,9 +180,9 @@ def setup_tensorflow():
     random.seed(FLAGS.random_seed)
     np.random.seed(FLAGS.random_seed)
 
-    summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)
+    # summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)
 
-    return sess, summary_writer
+    return sess
 
 
 def _test(onefilename=False):
@@ -200,7 +200,7 @@ def _test(onefilename=False):
         filenames = prepare_test_dir()
 
     # Setup global tensorflow state
-    sess, summary_writer = setup_tensorflow()
+    sess = setup_tensorflow()
 
     # Setup async input queues
     test_features, test_labels = srez_input.test_inputs(sess, filenames)
@@ -240,7 +240,7 @@ def _test16(onefilename=False):
         raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.test_dir,))
 
     # Setup global tensorflow state
-    sess, summary_writer = setup_tensorflow()
+    sess = setup_tensorflow()
 
     # Prepare directories
     if os.path.isfile(onefilename):
@@ -260,6 +260,8 @@ def _test16(onefilename=False):
      gene_output, gene_var_list,
      disc_real_output, disc_fake_output, disc_var_list] = \
         srez_model.create_model(sess, test_features, test_labels)
+
+
 
     # Restore variables from checkpoint
     saver = tf.train.Saver()
@@ -284,7 +286,7 @@ def _demo():
         raise FileNotFoundError("Could not find folder `%s'" % (FLAGS.checkpoint_dir,))
 
     # Setup global tensorflow state
-    sess, summary_writer = setup_tensorflow()
+    sess = setup_tensorflow()
 
     # Prepare directories
     filenames = prepare_dirs(delete_train_dir=False)
@@ -326,7 +328,7 @@ def _train():
     #               "Warning, Batch number restarted.")
 
     # Setup global tensorflow state
-    sess, summary_writer = setup_tensorflow()
+    sess = setup_tensorflow()
 
     # Prepare directories
     # all_filenames = prepare_dirs(delete_train_dir=True)
@@ -362,6 +364,7 @@ def _train():
         srez_model.create_optimizers(gene_loss, gene_var_list,
                                      disc_loss, disc_var_list)
 
+    summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)
     # Train model
     train_data = TrainData(locals())
     srez_train.train_model(train_data)
