@@ -107,7 +107,7 @@ class Model:
             reduction_indices = list(range(1, len(this_input.get_shape())))
             acc = tf.reduce_sum(this_input, reduction_indices=reduction_indices, keep_dims=True)
             out = this_input / (acc+FLAGS.epsilon)
-            #out = tf.verify_tensor_all_finite(out, "add_softmax failed; is sum equal to zero?")
+            # out = tf.verify_tensor_all_finite(out, "add_softmax failed; is sum equal to zero?")
         
         self.outputs.append(out)
         return self
@@ -228,7 +228,7 @@ class Model:
         # Add projection in series if needed prior to shortcut
         if num_units != int(self.get_output().get_shape()[3]) or stride != 1:
             ms = 1 if stride == 1 else mapsize
-            #bypass.add_batch_norm() # TBD: Needed?
+            # bypass.add_batch_norm() # TBD: Needed?
             if transpose:
                 self.add_conv2d_transpose(num_units, mapsize=ms, stride=stride, stddev_factor=1.)
             else:
@@ -268,7 +268,7 @@ class Model:
         with tf.variable_scope(self._get_layer_str()):
             prev_shape = self.get_output().get_shape()
             term_shape = term.get_shape()
-            #print("%s %s" % (prev_shape, term_shape))
+            # print("%s %s" % (prev_shape, term_shape))
             assert prev_shape == term_shape and "Can't sum terms with a different size"
             out = tf.add(self.get_output(), term)
         
@@ -390,10 +390,12 @@ def _generator_model(sess, features, labels, channels):
     nunits = res_units[-1]
     model.add_conv2d(nunits, mapsize=mapsize, stride=1, stddev_factor=2.)
     # Worse: model.add_batch_norm()
+    model.add_batch_norm()
     model.add_relu()
 
     model.add_conv2d(nunits, mapsize=1, stride=1, stddev_factor=2.)
     # Worse: model.add_batch_norm()
+    model.add_batch_norm()
     model.add_relu()
 
     # Last layer is sigmoid with no batch normalization
