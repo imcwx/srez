@@ -256,10 +256,10 @@ def _test16(onefilename=False):
     test_features, test_labels = srez_input.test_inputs(sess, filenames)
 
     # Create and initialize model
-    # [gene_minput, gene_moutput,
-    #  gene_output, gene_var_list,
-    #  disc_real_output, disc_fake_output, disc_var_list] = \
-    #     srez_model.create_model(sess, test_features, test_labels)
+    [gene_minput, gene_moutput,
+     gene_output, gene_var_list,
+     disc_real_output, disc_fake_output, disc_var_list] = \
+        srez_model.create_model(sess, test_features, test_labels)
 
     # Restore variables from checkpoint
     saver = tf.train.Saver()
@@ -315,53 +315,52 @@ class TrainData(object):
 
 
 def _train():
+    # Restore variables from checkpoint if EXISTS
+    # if tf.gfile.IsDirectory(FLAGS.checkpoint_dir):
+    #     filename = 'checkpoint_new.txt'
+    #     filename = os.path.join(FLAGS.checkpoint_dir, filename)
+    #     saver = tf.train.Saver()
+    #     if tf.gfile.Exists(filename):
+    #         saver.restore(tf.Session(), filename)
+    #         print("Restored previous checkpoint. "
+    #               "Warning, Batch number restarted.")
+
     # Setup global tensorflow state
     sess, summary_writer = setup_tensorflow()
 
-    # Restore variables from checkpoint if EXISTS
-    if tf.gfile.IsDirectory(FLAGS.checkpoint_dir):
-        filename = 'checkpoint_new.txt'
-        filename = os.path.join(FLAGS.checkpoint_dir, filename)
-        saver = tf.train.Saver()
-        if tf.gfile.Exists(filename):
-            saver.restore(tf.Session(), filename)
-            print("Restored previous checkpoint. "
-                  "Warning, Batch number restarted.")
-    else:
+    # Prepare directories
+    # all_filenames = prepare_dirs(delete_train_dir=True)
+    all_filenames = prepare_dirs(delete_train_dir=False)
 
-        # Prepare directories
-        # all_filenames = prepare_dirs(delete_train_dir=True)
-        all_filenames = prepare_dirs(delete_train_dir=False)
+    # Separate training and test sets
+    train_filenames = all_filenames[:-FLAGS.test_vectors]
+    test_filenames = all_filenames[-FLAGS.test_vectors:]
 
-        # Separate training and test sets
-        train_filenames = all_filenames[:-FLAGS.test_vectors]
-        test_filenames = all_filenames[-FLAGS.test_vectors:]
+    # TBD: Maybe download dataset here
 
-        # TBD: Maybe download dataset here
+    # Setup async input queues
+    train_features, train_labels = srez_input.setup_inputs(sess, train_filenames)
+    test_features, test_labels = srez_input.setup_inputs(sess, test_filenames)
 
-        # Setup async input queues
-        train_features, train_labels = srez_input.setup_inputs(sess, train_filenames)
-        test_features, test_labels = srez_input.setup_inputs(sess, test_filenames)
+    # Add some noise during training (think denoising autoencoders)
+    noise_level = .03
+    noisy_train_features = train_features + \
+                           tf.random_normal(train_features.get_shape(), stddev=noise_level)
 
-        # Add some noise during training (think denoising autoencoders)
-        noise_level = .03
-        noisy_train_features = train_features + \
-                               tf.random_normal(train_features.get_shape(), stddev=noise_level)
+    # Create and initialize model
+    [gene_minput, gene_moutput,
+     gene_output, gene_var_list,
+     disc_real_output, disc_fake_output, disc_var_list] = \
+        srez_model.create_model(sess, noisy_train_features, train_labels)
 
-        # Create and initialize model
-        [gene_minput, gene_moutput,
-         gene_output, gene_var_list,
-         disc_real_output, disc_fake_output, disc_var_list] = \
-            srez_model.create_model(sess, noisy_train_features, train_labels)
+    gene_loss = srez_model.create_generator_loss(disc_fake_output, gene_output, train_features)
+    disc_real_loss, disc_fake_loss = \
+        srez_model.create_discriminator_loss(disc_real_output, disc_fake_output)
+    disc_loss = tf.add(disc_real_loss, disc_fake_loss, name='disc_loss')
 
-        gene_loss = srez_model.create_generator_loss(disc_fake_output, gene_output, train_features)
-        disc_real_loss, disc_fake_loss = \
-            srez_model.create_discriminator_loss(disc_real_output, disc_fake_output)
-        disc_loss = tf.add(disc_real_loss, disc_fake_loss, name='disc_loss')
-
-        (global_step, learning_rate, gene_minimize, disc_minimize) = \
-            srez_model.create_optimizers(gene_loss, gene_var_list,
-                                         disc_loss, disc_var_list)
+    (global_step, learning_rate, gene_minimize, disc_minimize) = \
+        srez_model.create_optimizers(gene_loss, gene_var_list,
+                                     disc_loss, disc_var_list)
 
     # Train model
     train_data = TrainData(locals())
