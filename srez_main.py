@@ -315,6 +315,9 @@ class TrainData(object):
 
 
 def _train():
+    # Setup global tensorflow state
+    sess, summary_writer = setup_tensorflow()
+
     # Restore variables from checkpoint if EXISTS
     if tf.gfile.IsDirectory(FLAGS.checkpoint_dir):
         filename = 'checkpoint_new.txt'
@@ -325,8 +328,6 @@ def _train():
             print("Restored previous checkpoint. "
                   "Warning, Batch number restarted.")
     else:
-        # Setup global tensorflow state
-        sess, summary_writer = setup_tensorflow()
 
         # Prepare directories
         # all_filenames = prepare_dirs(delete_train_dir=True)
