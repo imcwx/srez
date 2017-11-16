@@ -8,8 +8,8 @@ import sys
 import os.path
 import random
 import numpy as np
-import imageio
-from PIL import Image
+# import imageio
+# from PIL import Image
 
 import tensorflow as tf
 
@@ -75,7 +75,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 25000,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 180,
+tf.app.flags.DEFINE_integer('train_time', 240,
                             "Time in minutes to train the model")
 # 20
 
