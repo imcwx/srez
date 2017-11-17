@@ -75,7 +75,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 25000,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 240,
+tf.app.flags.DEFINE_integer('train_time', 300,
                             "Time in minutes to train the model")
 # 20
 
@@ -315,16 +315,6 @@ class TrainData(object):
 
 
 def _train():
-    # Restore variables from checkpoint if EXISTS
-    # if tf.gfile.IsDirectory(FLAGS.checkpoint_dir):
-    #     filename = 'checkpoint_new.txt'
-    #     filename = os.path.join(FLAGS.checkpoint_dir, filename)
-    #     saver = tf.train.Saver()
-    #     if tf.gfile.Exists(filename):
-    #         saver.restore(tf.Session(), filename)
-    #         print("Restored previous checkpoint. "
-    #               "Warning, Batch number restarted.")
-
     # Setup global tensorflow state
     sess = setup_tensorflow()
 
@@ -362,7 +352,17 @@ def _train():
         srez_model.create_optimizers(gene_loss, gene_var_list,
                                      disc_loss, disc_var_list)
 
-    summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)
+    # summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)
+
+    # Restore variables from checkpoint if EXISTS
+    # if tf.gfile.IsDirectory(FLAGS.checkpoint_dir):
+    #     filename = 'checkpoint_new.txt'
+    #     filename = os.path.join(FLAGS.checkpoint_dir, filename)
+    #     saver = tf.train.Saver()
+    #     if tf.gfile.Exists(filename):
+    #         saver.restore(tf.Session(), filename)
+    #         print("Restored previous checkpoint. "
+    #               "Warning, Batch number restarted.")
 
     # Train model
     train_data = TrainData(locals())

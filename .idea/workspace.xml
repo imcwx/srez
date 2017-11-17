@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="241c3d56-5c9a-4c6e-82e2-a1d70fb3cc91" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_input.py" afterPath="$PROJECT_DIR$/srez_input.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_main.py" afterPath="$PROJECT_DIR$/srez_main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_model.py" afterPath="$PROJECT_DIR$/srez_model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_train.py" afterPath="$PROJECT_DIR$/srez_train.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +20,7 @@
       <file leaf-file-name="srez_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srez_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="85">
               <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -30,8 +32,8 @@
       <file leaf-file-name="srez_main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srez_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2703">
-              <caret line="172" column="36" lean-forward="false" selection-start-line="172" selection-start-column="36" selection-end-line="172" selection-end-column="36" />
+            <state relative-caret-position="298">
+              <caret line="253" column="0" lean-forward="true" selection-start-line="253" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -39,21 +41,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="srez_model.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="srez_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srez_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="397" column="26" lean-forward="true" selection-start-line="397" selection-start-column="26" selection-end-line="397" selection-end-column="26" />
+            <state relative-caret-position="-7628">
+              <caret line="25" column="54" lean-forward="true" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="srez_train.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="srez_train.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="69" column="38" lean-forward="false" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
+            <state relative-caret-position="209">
+              <caret line="75" column="17" lean-forward="true" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -64,8 +66,8 @@
       <file leaf-file-name="srez_input.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srez_input.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="41" lean-forward="false" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+            <state relative-caret-position="51">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -92,15 +94,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>learn</find>
-      <find>lrval</find>
-      <find>AdamOptimizer</find>
-      <find>summaries</find>
-      <find>tf</find>
-      <find>optim</find>
-      <find>optimi</find>
-      <find>test</find>
-      <find>test_vectors</find>
       <find>layer</find>
       <find>gene_l1_factor</find>
       <find>gene_mo</find>
@@ -109,7 +102,6 @@
       <find>key</find>
       <find>value</find>
       <find>gene_moutput</find>
-      <find>sess</find>
       <find>td.fil</find>
       <find>norm</find>
       <find>conv</find>
@@ -122,6 +114,16 @@
       <find>setup_tensorflow</find>
       <find>batch_norm</find>
       <find>add_batch_norm</find>
+      <find>dropout</find>
+      <find>gen</find>
+      <find>create_generator_loss</find>
+      <find>bri</find>
+      <find>gene_loss</find>
+      <find>disc_minimize</find>
+      <find>variable</find>
+      <find>sess</find>
+      <find>device</find>
+      <find>summary_</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -138,11 +140,11 @@
         <option value="$PROJECT_DIR$/srez_demo.py" />
         <option value="$PROJECT_DIR$/environment.yml" />
         <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/srez_input.py" />
         <option value="$PROJECT_DIR$/srez_test.py" />
+        <option value="$PROJECT_DIR$/srez_input.py" />
+        <option value="$PROJECT_DIR$/srez_model.py" />
         <option value="$PROJECT_DIR$/srez_train.py" />
         <option value="$PROJECT_DIR$/srez_main.py" />
-        <option value="$PROJECT_DIR$/srez_model.py" />
       </list>
     </option>
   </component>
@@ -611,7 +613,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510823311764</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="version 1.3: add_batch_norm() for generator model. apparently it does worse. just trying.">
+      <created>1510826537073</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1510826537073</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -621,6 +630,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14421669" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5058565" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18858954" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16323297" sideWeight="0.4941435" order="2" side_tool="false" content_ui="tabs" />
@@ -636,7 +646,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18858954" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Log Manager" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -670,7 +679,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed to 6 hours since batch size is 32" />
     <MESSAGE value="change to 15k for each checkpoint. version 6. pleasee don't OOM" />
     <MESSAGE value="version 7, change adam optimizer." />
     <MESSAGE value="ignore previous commit." />
@@ -695,7 +703,9 @@
     <MESSAGE value="version 1.2: setup first" />
     <MESSAGE value="version 1.2: run 4hrs 32x32" />
     <MESSAGE value="version 1.2: run 4hrs 32x32 - summary writter after graph?" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.2: run 4hrs 32x32 - summary writter after graph?" />
+    <MESSAGE value="version 1.3: add_batch_norm() for generator model. apparently it does worse. just trying." />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.3: add_batch_norm() for generator model. apparently it does worse. just trying." />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1013,19 +1023,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE.md" />
     <entry file="file://$PROJECT_DIR$/environment.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1037,18 +1035,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="117" lean-forward="false" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="117" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
         </state>
       </provider>
     </entry>
@@ -1069,16 +1055,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_input.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="41" lean-forward="false" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srez_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7628">
+          <caret line="25" column="54" lean-forward="true" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srez_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2703">
-          <caret line="172" column="36" lean-forward="false" selection-start-line="172" selection-start-column="36" selection-end-line="172" selection-end-column="36" />
+        <state relative-caret-position="298">
+          <caret line="253" column="0" lean-forward="true" selection-start-line="253" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
@@ -1087,29 +1091,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="69" column="38" lean-forward="false" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
+        <state relative-caret-position="209">
+          <caret line="75" column="17" lean-forward="true" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srez_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srez_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="397" column="26" lean-forward="true" selection-start-line="397" selection-start-column="26" selection-end-line="397" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -67,8 +67,9 @@ def _save_checkpoint(train_data, batch):
 def train_model(train_data):
     td = train_data
 
-    summaries = tf.summary.merge_all()
+    # summaries_op = tf.summary.merge_all()
     td.sess.run(tf.global_variables_initializer())
+    summary_writer = tf.summary.FileWriter(FLAGS.train_dir, td.sess.graph)
 
     lrval       = FLAGS.learning_rate_start
     start_time  = time.time()
@@ -82,12 +83,15 @@ def train_model(train_data):
 
     while not done:
         batch += 1
-        gene_loss = disc_real_loss = disc_fake_loss = -1.234
+        # gene_loss = disc_real_loss = disc_fake_loss = -1.234
 
         feed_dict = {td.learning_rate : lrval}
 
         ops = [td.gene_minimize, td.disc_minimize, td.gene_loss, td.disc_real_loss, td.disc_fake_loss]
-        _, _, gene_loss, disc_real_loss, disc_fake_loss = td.sess.run(ops, feed_dict=feed_dict)
+        # _, _, gene_loss, disc_real_loss, disc_fake_loss = td.sess.run(ops, feed_dict=feed_dict)
+        _, _, summary = td.sess.run(ops, feed_dict=feed_dict)
+        gene_loss, disc_real_loss, disc_fake_loss = summary
+        summary_writer.add_summary(summary, batch)
         
         if batch % 20 == 0:
             # Show we are alive
@@ -116,4 +120,5 @@ def train_model(train_data):
             _save_checkpoint(td, batch)
 
     _save_checkpoint(td, batch)
+    td.sess.close()
     print('Finished training!')
