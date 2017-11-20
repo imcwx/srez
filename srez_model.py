@@ -330,7 +330,7 @@ class Model:
         """Adds dropout function to this model"""
 
         with tf.variable_scope(self._get_layer_str()):
-            dropout = tf.placeholder_with_default(FLAGS.dropout, tf.float32, name="dropout")
+            dropout = tf.placeholder_with_default(FLAGS.dropout, 0, name="dropout")
             out = tf.nn.dropout(self.get_output(), dropout)
             # out = tf.nn.dropout(self.get_output())
 

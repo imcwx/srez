@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="241c3d56-5c9a-4c6e-82e2-a1d70fb3cc91" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_model.py" afterPath="$PROJECT_DIR$/srez_model.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,8 +41,8 @@
       <file leaf-file-name="srez_model.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="331" column="54" lean-forward="true" selection-start-line="331" selection-start-column="54" selection-end-line="331" selection-end-column="54" />
+            <state relative-caret-position="396">
+              <caret line="332" column="66" lean-forward="false" selection-start-line="332" selection-start-column="66" selection-end-line="332" selection-end-column="66" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -265,13 +266,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1509530761276</updated>
-    </task>
-    <task id="LOCAL-00016" summary="24 hours run">
-      <created>1510054606142</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1510054606142</updated>
     </task>
     <task id="LOCAL-00017" summary="4 hours, 0.91 learning rate to achieve 1/256 reduction by 4hours. increased checkpoint and batch image output rate.">
       <created>1510119487646</created>
@@ -609,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511165507265</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="version 1.5: debugging. dropout placeholder">
+      <created>1511165587356</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1511165587356</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1064,8 +1065,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="331" column="54" lean-forward="true" selection-start-line="331" selection-start-column="54" selection-end-line="331" selection-end-column="54" />
+        <state relative-caret-position="396">
+          <caret line="332" column="66" lean-forward="false" selection-start-line="332" selection-start-column="66" selection-end-line="332" selection-end-column="66" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
