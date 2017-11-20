@@ -52,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/srez_train.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="92" column="67" lean-forward="true" selection-start-line="92" selection-start-column="67" selection-end-line="92" selection-end-column="67" />
+              <caret line="92" column="68" lean-forward="true" selection-start-line="92" selection-start-column="68" selection-end-line="92" selection-end-column="68" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -273,13 +273,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1509530761276</updated>
-    </task>
-    <task id="LOCAL-00005" summary="test files">
-      <created>1510022500073</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1510022500073</updated>
     </task>
     <task id="LOCAL-00006" summary="test files">
       <created>1510022798502</created>
@@ -617,7 +610,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511142073912</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="version 1.4: tensor writing log files.">
+      <created>1511142727497</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1511142727497</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1089,7 +1089,7 @@
     <entry file="file://$PROJECT_DIR$/srez_train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="92" column="67" lean-forward="true" selection-start-line="92" selection-start-column="67" selection-end-line="92" selection-end-column="67" />
+          <caret line="92" column="68" lean-forward="true" selection-start-line="92" selection-start-column="68" selection-end-line="92" selection-end-column="68" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
