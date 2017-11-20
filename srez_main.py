@@ -49,7 +49,7 @@ tf.app.flags.DEFINE_float('learning_beta1', 0.9,
 tf.app.flags.DEFINE_float('learning_rate_start', 0.00020,
                           "Starting learning rate used for AdamOptimizer")
 
-tf.app.flags.DEFINE_integer('learning_rate_half_life', 2500,
+tf.app.flags.DEFINE_integer('learning_rate_half_life', 1000,
                             "Number of batches until learning rate is halved")
 # 5000
 # 1000
@@ -95,7 +95,7 @@ tf.app.flags.DEFINE_integer('test_size', 32,
 tf.app.flags.DEFINE_integer('crop_size', 32,
                             "Image crop size in pixels")
 
-tf.app.flags.DEFINE_integer("learning_rate_reduction", 0.90,
+tf.app.flags.DEFINE_integer("learning_rate_reduction", 0.91,
                             "The fraction of reduction in learning rate.")
 # 0.5
 # 0.91
