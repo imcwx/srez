@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="241c3d56-5c9a-4c6e-82e2-a1d70fb3cc91" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/srez_model.py" afterPath="$PROJECT_DIR$/srez_model.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="srez_model.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="srez_model.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srez_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1746">
-              <caret line="332" column="80" lean-forward="true" selection-start-line="332" selection-start-column="80" selection-end-line="332" selection-end-column="80" />
+            <state relative-caret-position="379">
+              <caret line="331" column="54" lean-forward="true" selection-start-line="331" selection-start-column="54" selection-end-line="331" selection-end-column="54" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -49,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="srez_train.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="srez_train.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srez_train.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="226">
-              <caret line="81" column="40" lean-forward="true" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
+              <caret line="81" column="39" lean-forward="false" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="39" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -110,8 +111,8 @@
       <find>coord</find>
       <find>feed</find>
       <find>feed_dict</find>
-      <find>dropout</find>
       <find>dropout = tf.placeholder(tf.float32)</find>
+      <find>dropout</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -265,13 +266,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1509530761276</updated>
-    </task>
-    <task id="LOCAL-00014" summary="setting gpu limit">
-      <created>1510037582806</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1510037582806</updated>
     </task>
     <task id="LOCAL-00015" summary="flagss">
       <created>1510037711733</created>
@@ -609,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511165039281</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="version 1.5: debugging. dropout placeholder">
+      <created>1511165197106</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1511165197106</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1042,6 +1043,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/srez_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="81" column="39" lean-forward="false" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/srez_main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -1054,20 +1065,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srez_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1746">
-          <caret line="332" column="80" lean-forward="true" selection-start-line="332" selection-start-column="80" selection-end-line="332" selection-end-column="80" />
+        <state relative-caret-position="379">
+          <caret line="331" column="54" lean-forward="true" selection-start-line="331" selection-start-column="54" selection-end-line="331" selection-end-column="54" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srez_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="81" column="40" lean-forward="true" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
