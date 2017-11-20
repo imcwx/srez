@@ -67,7 +67,7 @@ def _save_checkpoint(train_data, batch):
 def train_model(train_data):
     td = train_data
 
-    # summaries_op = tf.summary.merge_all()
+    summaries_op = tf.summary.merge_all()
     td.sess.run(tf.global_variables_initializer())
     summary_writer = tf.summary.FileWriter(FLAGS.train_dir, td.sess.graph)
 
@@ -89,8 +89,8 @@ def train_model(train_data):
 
         ops = [td.gene_minimize, td.disc_minimize, td.gene_loss, td.disc_real_loss, td.disc_fake_loss]
         # _, _, gene_loss, disc_real_loss, disc_fake_loss = td.sess.run(ops, feed_dict=feed_dict)
-        summary = td.sess.run(ops, feed_dict=feed_dict)
-        _, _, gene_loss, disc_real_loss, disc_fake_loss = summary
+        _, _, gene_loss, disc_real_loss, disc_fake_loss, summary = td.sess.run([ops, summaries_op], feed_dict=feed_dict)
+        # _, _, gene_loss, disc_real_loss, disc_fake_loss = summary
         summary_writer.add_summary(summary, batch)
         
         if batch % 20 == 0:
