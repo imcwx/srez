@@ -79,7 +79,7 @@ def train_model(train_data):
     start_time = time.time()
     done = False
     batch = 0
-    dropout = tf.placeholder(tf.float32)
+    # dropout = tf.placeholder(tf.float32)
     keep_prob = FLAGS.dropout
 
     assert FLAGS.learning_rate_half_life % 10 == 0
