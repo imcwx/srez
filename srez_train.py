@@ -67,6 +67,10 @@ def _save_checkpoint(train_data, batch):
 def train_model(train_data):
     td = train_data
 
+    tf.summary.scalar("gene_loss", td.gene_loss)
+    tf.summary.scalar("disc_real_loss", td.disc_real_loss)
+    tf.summary.scalar("disc_fake_loss", td.disc_fake_loss)
+
     summaries_op = tf.summary.merge_all()
     td.sess.run(tf.global_variables_initializer())
     summary_writer = tf.summary.FileWriter(FLAGS.train_dir, td.sess.graph)
@@ -120,5 +124,7 @@ def train_model(train_data):
             _save_checkpoint(td, batch)
 
     _save_checkpoint(td, batch)
+    summary_writer.flush()
+    summary_writer.close()
     td.sess.close()
     print('Finished training!')
