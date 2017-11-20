@@ -80,7 +80,7 @@ def train_model(train_data):
     done = False
     batch = 0
     # dropout = tf.placeholder(tf.float32)
-    keep_prob = FLAGS.dropout
+    dropout_rate = FLAGS.dropout_rate
 
     assert FLAGS.learning_rate_half_life % 10 == 0
 
@@ -91,7 +91,7 @@ def train_model(train_data):
         batch += 1
         # gene_loss = disc_real_loss = disc_fake_loss = -1.234
 
-        feed_dict = {td.learning_rate: lrval, dropout: keep_prob}
+        feed_dict = {td.learning_rate: lrval, td.dropout: dropout_rate}
 
         ops = [td.gene_minimize, td.disc_minimize, td.gene_loss, td.disc_real_loss, td.disc_fake_loss]
         # _, _, gene_loss, disc_real_loss, disc_fake_loss = td.sess.run(ops, feed_dict=feed_dict)
@@ -117,7 +117,7 @@ def train_model(train_data):
 
         if batch % FLAGS.summary_period == 0:
             # Show progress with test features
-            feed_dict = {td.gene_minput: test_feature, dropout: 1.0}
+            feed_dict = {td.gene_minput: test_feature, td.dropout: 1.0}
             gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
             _summarize_progress(td, test_feature, test_label, gene_output, batch, 'out')
             

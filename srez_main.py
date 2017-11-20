@@ -100,7 +100,7 @@ tf.app.flags.DEFINE_float("learning_rate_reduction", 0.5,
 # 0.5
 # 0.91
 
-tf.app.flags.DEFINE_float("dropout", 0.5,
+tf.app.flags.DEFINE_float("dropout_rate", 0.5,
                           "The dropout rate.")
 
 
@@ -211,7 +211,8 @@ def _test(onefilename=False):
     # Create and initialize model
     [gene_minput, gene_moutput,
      gene_output, gene_var_list,
-     disc_real_output, disc_fake_output, disc_var_list] = \
+     disc_real_output, disc_fake_output, disc_var_list,
+     dropout] = \
         srez_model.create_model(sess, test_features, test_labels)
     dropout = tf.placeholder(tf.float32)
 
@@ -262,9 +263,9 @@ def _test16(onefilename=False):
     # Create and initialize model
     [gene_minput, gene_moutput,
      gene_output, gene_var_list,
-     disc_real_output, disc_fake_output, disc_var_list] = \
+     disc_real_output, disc_fake_output, disc_var_list,
+     dropout] = \
         srez_model.create_model(sess, test_features, test_labels)
-    dropout = tf.placeholder(tf.float32)
 
     # Restore variables from checkpoint
     saver = tf.train.Saver()
@@ -300,7 +301,8 @@ def _demo():
     # Create and initialize model
     [gene_minput, gene_moutput,
      gene_output, gene_var_list,
-     disc_real_output, disc_fake_output, disc_var_list] = \
+     disc_real_output, disc_fake_output, disc_var_list,
+     dropout] = \
         srez_model.create_model(sess, features, labels)
 
     # Restore variables from checkpoint
@@ -345,7 +347,8 @@ def _train():
     # Create and initialize model
     [gene_minput, gene_moutput,
      gene_output, gene_var_list,
-     disc_real_output, disc_fake_output, disc_var_list] = \
+     disc_real_output, disc_fake_output, disc_var_list,
+     dropout] = \
         srez_model.create_model(sess, noisy_train_features, train_labels)
 
     gene_loss = srez_model.create_generator_loss(disc_fake_output, gene_output, train_features)

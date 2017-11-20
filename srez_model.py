@@ -326,11 +326,10 @@ class Model:
         scope = self._get_layer_str(layer)
         return tf.get_collection(tf.GraphKeys.VARIABLES, scope=scope)
 
-    def add_dropout(self):
+    def add_dropout(self, dropout):
         """Adds dropout function to this model"""
 
         with tf.variable_scope(self._get_layer_str()):
-            dropout = tf.placeholder(tf.float32)
             out = tf.layers.dropout(self.get_output(), dropout)
             # out = tf.nn.dropout(self.get_output())
 
@@ -338,7 +337,7 @@ class Model:
         return self
 
 
-def _discriminator_model(sess, features, disc_input):
+def _discriminator_model(sess, features, disc_input, dropout):
     # Fully convolutional model
     mapsize = 3
     layers = [64, 128, 256, 512]
@@ -365,7 +364,7 @@ def _discriminator_model(sess, features, disc_input):
     model.add_relu()
 
     # Is there where to add dropout?
-    model.add_dropout()
+    model.add_dropout(dropout)
 
     # Linearly map to real/fake and return average score
     # (softmax will be applied later)
@@ -378,7 +377,7 @@ def _discriminator_model(sess, features, disc_input):
     return model.get_output(), disc_vars
 
 
-def _generator_model(sess, features, labels, channels):
+def _generator_model(sess, features, labels, channels, dropout):
     # Upside-down all-convolutional resnet
 
     mapsize = 3
@@ -417,7 +416,7 @@ def _generator_model(sess, features, labels, channels):
     model.add_relu()
 
     # Is there where to add dropout?
-    model.add_dropout()
+    model.add_dropout(dropout)
 
     # Last layer is sigmoid with no batch normalization
     model.add_conv2d(channels, mapsize=1, stride=1, stddev_factor=1.)
@@ -436,15 +435,16 @@ def create_model(sess, features, labels):
     channels = int(features.get_shape()[3])
 
     gene_minput = tf.placeholder(tf.float32, shape=[FLAGS.batch_size, rows, cols, channels])
+    dropout = tf.placeholder(tf.float32, name="dropout")
 
     # TBD: Is there a better way to instance the generator?
     with tf.variable_scope('gene') as scope:
         gene_output, gene_var_list = \
-            _generator_model(sess, features, labels, channels)
+            _generator_model(sess, features, labels, channels, dropout)
 
         scope.reuse_variables()
 
-        gene_moutput, _ = _generator_model(sess, gene_minput, labels, channels)
+        gene_moutput, _ = _generator_model(sess, gene_minput, labels, channels, dropout)
 
     # Discriminator with real data
     disc_real_input = tf.identity(labels, name='disc_real_input')
@@ -452,15 +452,16 @@ def create_model(sess, features, labels):
     # TBD: Is there a better way to instance the discriminator?
     with tf.variable_scope('disc') as scope:
         disc_real_output, disc_var_list = \
-            _discriminator_model(sess, features, disc_real_input)
+            _discriminator_model(sess, features, disc_real_input, dropout)
 
         scope.reuse_variables()
 
-        disc_fake_output, _ = _discriminator_model(sess, features, gene_output)
+        disc_fake_output, _ = _discriminator_model(sess, features, gene_output, dropout)
 
     return [gene_minput, gene_moutput,
             gene_output, gene_var_list,
-            disc_real_output, disc_fake_output, disc_var_list]
+            disc_real_output, disc_fake_output, disc_var_list,
+            dropout]
 
 
 def _downscale(images, K):
