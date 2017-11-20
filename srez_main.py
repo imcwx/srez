@@ -95,10 +95,13 @@ tf.app.flags.DEFINE_integer('test_size', 32,
 tf.app.flags.DEFINE_integer('crop_size', 32,
                             "Image crop size in pixels")
 
-tf.app.flags.DEFINE_integer("learning_rate_reduction", 0.91,
-                            "The fraction of reduction in learning rate.")
+tf.app.flags.DEFINE_float("learning_rate_reduction", 0.91,
+                          "The fraction of reduction in learning rate.")
 # 0.5
 # 0.91
+
+tf.app.flags.DEFINE_float("dropout", 0.5,
+                          "The dropout rate.")
 
 
 def prepare_dirs(delete_train_dir=False):
@@ -221,7 +224,7 @@ def _test(onefilename=False):
     test_data = TrainData(locals())
     td = test_data
     test_feature, test_label = sess.run([test_features, test_labels])
-    feed_dict = {gene_minput: test_feature}
+    feed_dict = {gene_minput: test_feature, dropout: 1.0}
     gene_output = sess.run(gene_moutput, feed_dict=feed_dict)
 
     if onefilename:
@@ -272,7 +275,7 @@ def _test16(onefilename=False):
         test_features, test_labels = srez_input.test_inputs(sess, [file])
 
         test_feature, test_label = sess.run([test_features, test_labels])
-        feed_dict = {gene_minput: test_label}
+        feed_dict = {gene_minput: test_label, dropout: 1.0}
         gene_output = sess.run(gene_moutput, feed_dict=feed_dict)
 
         srez_test.predict_one(sess, test_feature, test_label, gene_output, file)

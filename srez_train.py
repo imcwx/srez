@@ -77,8 +77,9 @@ def train_model(train_data):
 
     lrval       = FLAGS.learning_rate_start
     start_time  = time.time()
-    done  = False
+    done = False
     batch = 0
+    keep_prob = FLAGS.dropout
 
     assert FLAGS.learning_rate_half_life % 10 == 0
 
@@ -89,7 +90,7 @@ def train_model(train_data):
         batch += 1
         # gene_loss = disc_real_loss = disc_fake_loss = -1.234
 
-        feed_dict = {td.learning_rate : lrval}
+        feed_dict = {td.learning_rate: lrval, dropout: keep_prob}
 
         ops = [td.gene_minimize, td.disc_minimize, td.gene_loss, td.disc_real_loss, td.disc_fake_loss]
         # _, _, gene_loss, disc_real_loss, disc_fake_loss = td.sess.run(ops, feed_dict=feed_dict)
@@ -115,7 +116,7 @@ def train_model(train_data):
 
         if batch % FLAGS.summary_period == 0:
             # Show progress with test features
-            feed_dict = {td.gene_minput: test_feature}
+            feed_dict = {td.gene_minput: test_feature, dropout: 1.0}
             gene_output = td.sess.run(td.gene_moutput, feed_dict=feed_dict)
             _summarize_progress(td, test_feature, test_label, gene_output, batch, 'out')
             
@@ -124,7 +125,7 @@ def train_model(train_data):
             _save_checkpoint(td, batch)
 
     _save_checkpoint(td, batch)
-    summary_writer.flush()
-    summary_writer.close()
+    # summary_writer.flush()
+    # summary_writer.close()
     td.sess.close()
     print('Finished training!')

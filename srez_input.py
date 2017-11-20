@@ -50,6 +50,7 @@ def setup_inputs(sess, filenames, image_size=None, capacity_factor=3):
                                           capacity=capacity_factor * FLAGS.batch_size,
                                           name='labels_and_features')
 
+        # coord = tf.train.Coordinator()
         tf.train.start_queue_runners(sess=sess)
 
     return features, labels

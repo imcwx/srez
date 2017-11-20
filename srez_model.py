@@ -29,6 +29,7 @@ class Model:
         stddev = np.sqrt(stddev_factor / np.sqrt(prev_units * num_units))
         return tf.truncated_normal([prev_units, num_units],
                                    mean=0.0, stddev=stddev)
+
     def _glorot_initializer_conv2d(self, prev_units, num_units, mapsize, stddev_factor=1.0):
         """Initialization in the style of Glorot 2010.
 
@@ -325,6 +326,17 @@ class Model:
         scope = self._get_layer_str(layer)
         return tf.get_collection(tf.GraphKeys.VARIABLES, scope=scope)
 
+    def add_dropout(self):
+        """Adds dropout function to this model"""
+
+        with tf.variable_scope(self._get_layer_str()):
+            dropout = tf.placeholder(tf.float32)
+            out = tf.nn.dropout(self.get_output(), dropout)
+            # out = tf.nn.dropout(self.get_output())
+
+        self.outputs.append(out)
+        return self
+
 
 def _discriminator_model(sess, features, disc_input):
     # Fully convolutional model
@@ -351,6 +363,9 @@ def _discriminator_model(sess, features, disc_input):
     model.add_conv2d(nunits, mapsize=1, stride=1, stddev_factor=stddev_factor)
     model.add_batch_norm()
     model.add_relu()
+
+    # Is there where to add dropout?
+    model.add_dropout()
 
     # Linearly map to real/fake and return average score
     # (softmax will be applied later)
@@ -400,6 +415,9 @@ def _generator_model(sess, features, labels, channels):
     # Worse: model.add_batch_norm()
     # model.add_batch_norm()
     model.add_relu()
+
+    # Is there where to add dropout?
+    model.add_dropout()
 
     # Last layer is sigmoid with no batch normalization
     model.add_conv2d(channels, mapsize=1, stride=1, stddev_factor=1.)
