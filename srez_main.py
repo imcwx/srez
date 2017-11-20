@@ -213,6 +213,7 @@ def _test(onefilename=False):
      gene_output, gene_var_list,
      disc_real_output, disc_fake_output, disc_var_list] = \
         srez_model.create_model(sess, test_features, test_labels)
+    dropout = tf.placeholder(tf.float32)
 
     # Restore variables from checkpoint
     saver = tf.train.Saver()
@@ -263,6 +264,7 @@ def _test16(onefilename=False):
      gene_output, gene_var_list,
      disc_real_output, disc_fake_output, disc_var_list] = \
         srez_model.create_model(sess, test_features, test_labels)
+    dropout = tf.placeholder(tf.float32)
 
     # Restore variables from checkpoint
     saver = tf.train.Saver()

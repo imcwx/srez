@@ -75,10 +75,11 @@ def train_model(train_data):
     td.sess.run(tf.global_variables_initializer())
     summary_writer = tf.summary.FileWriter(FLAGS.train_dir, td.sess.graph)
 
-    lrval       = FLAGS.learning_rate_start
-    start_time  = time.time()
+    lrval = FLAGS.learning_rate_start
+    start_time = time.time()
     done = False
     batch = 0
+    dropout = tf.placeholder(tf.float32)
     keep_prob = FLAGS.dropout
 
     assert FLAGS.learning_rate_half_life % 10 == 0
