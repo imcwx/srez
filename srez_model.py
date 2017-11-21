@@ -331,7 +331,6 @@ class Model:
 
         with tf.variable_scope(self._get_layer_str()):
             out = tf.layers.dropout(self.get_output(), dropout)
-            # out = tf.nn.dropout(self.get_output())
 
         self.outputs.append(out)
         return self

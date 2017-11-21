@@ -67,20 +67,27 @@ def _save_checkpoint(train_data, batch):
 def train_model(train_data):
     td = train_data
 
+    # Input summary scalars
     tf.summary.scalar("gene_loss", td.gene_loss)
     tf.summary.scalar("disc_real_loss", td.disc_real_loss)
     tf.summary.scalar("disc_fake_loss", td.disc_fake_loss)
 
+    # Initialize summary variables and writer.
     summaries_op = tf.summary.merge_all()
     td.sess.run(tf.global_variables_initializer())
     summary_writer = tf.summary.FileWriter(FLAGS.train_dir, td.sess.graph)
 
+    # Setup default values
     lrval = FLAGS.learning_rate_start
     start_time = time.time()
     done = False
     batch = 0
     # dropout = tf.placeholder(tf.float32)
     dropout_rate = FLAGS.dropout_rate
+
+    # Start input coordinator.
+    coord = tf.train.Coordinator()
+    threads = tf.train.start_queue_runners(sess=td.sess, coord=coord)
 
     assert FLAGS.learning_rate_half_life % 10 == 0
 
@@ -89,13 +96,13 @@ def train_model(train_data):
 
     while not done:
         batch += 1
-        # gene_loss = disc_real_loss = disc_fake_loss = -1.234
 
+        # MAIN RUN SESSION
         feed_dict = {td.learning_rate: lrval, td.dropout: dropout_rate}
-
         ops = [td.gene_minimize, td.disc_minimize, td.gene_loss, td.disc_real_loss, td.disc_fake_loss]
-        # _, _, gene_loss, disc_real_loss, disc_fake_loss = td.sess.run(ops, feed_dict=feed_dict)
         ops_values, summary = td.sess.run([ops, summaries_op], feed_dict=feed_dict)
+
+        # Storing local values to print and write
         _, _, gene_loss, disc_real_loss, disc_fake_loss = ops_values
         summary_writer.add_summary(summary, batch)
         
@@ -125,8 +132,11 @@ def train_model(train_data):
             # Save checkpoint
             _save_checkpoint(td, batch)
 
+    # Properly close the session.
     _save_checkpoint(td, batch)
-    # summary_writer.flush()
-    # summary_writer.close()
+    summary_writer.flush()
+    summary_writer.close()
+    coord.request_stop()
+    coord.join(threads)
     td.sess.close()
     print('Finished training!')

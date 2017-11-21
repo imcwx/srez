@@ -75,7 +75,7 @@ tf.app.flags.DEFINE_integer('test_vectors', 25000,
 tf.app.flags.DEFINE_string('train_dir', 'train',
                            "Output folder where training logs are dumped.")
 
-tf.app.flags.DEFINE_integer('train_time', 300,
+tf.app.flags.DEFINE_integer('train_time', 360,
                             "Time in minutes to train the model")
 # 20
 
@@ -100,7 +100,7 @@ tf.app.flags.DEFINE_float("learning_rate_reduction", 0.5,
 # 0.5
 # 0.91
 
-tf.app.flags.DEFINE_float("dropout_rate", 0.5,
+tf.app.flags.DEFINE_float("dropout_rate", 0.2,
                           "The dropout rate.")
 
 
@@ -254,6 +254,7 @@ def _test16(onefilename=False):
         filenames = [os.path.join(onefilename, f) for f in os.listdir(onefilename) if
                      os.path.isfile(os.path.join(onefilename, f))]
 
+    # Was to check the size input.
     # im = Image.open(onefilename)
     # size = im.size
 
@@ -274,6 +275,7 @@ def _test16(onefilename=False):
 
     saver.restore(sess, filename)
 
+    # Loop through and run/predict each picture.
     for file in filenames:
         test_features, test_labels = srez_input.test_inputs(sess, [file])
 
@@ -359,8 +361,6 @@ def _train():
     (global_step, learning_rate, gene_minimize, disc_minimize) = \
         srez_model.create_optimizers(gene_loss, gene_var_list,
                                      disc_loss, disc_var_list)
-
-    # summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)
 
     # Restore variables from checkpoint if EXISTS
     # if tf.gfile.IsDirectory(FLAGS.checkpoint_dir):
